@@ -1,4 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1776629496
-player.tscn::PackedScene::2699383171029490140::1776629496::0::1::::<><><>0<>0<><>::
-::res://Player/::0
+::res://::1776629889
+icon.svg::CompressedTexture2D::7935289181559461014::1776629782::1776629782::1::::<><><>0<>0<>171f7e51855f81a9d1aeb548e4ab5e5c<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://Player/::1776629782
+player.tscn::PackedScene::2699383171029490140::1776629782::0::1::::<><><>0<>0<><>::
