@@ -1,10 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bepupgc7tk38k"]
+[gd_scene load_steps=4 format=3 uid="uid://bepupgc7tk38k"]
 
 [ext_resource type="Script" uid="uid://dqf7lanaasfjk" path="res://Scripts/player.gd" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://dvw4yjggjjnmv" path="res://Assets/player_bun.aseprite3.png" id="2_4ntmi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btcbx"]
+radius = 5.0
+height = 14.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_l8h54")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("2_4ntmi")
+hframes = 8
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_btcbx")
