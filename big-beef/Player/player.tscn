@@ -8,6 +8,7 @@ radius = 5.0
 height = 14.0
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_l8h54")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,3 +22,6 @@ position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_btcbx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+
+[node name="Abilities" type="Node2D" parent="."]
