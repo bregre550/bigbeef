@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bepupgc7tk38k"]
+[gd_scene load_steps=6 format=3 uid="uid://bepupgc7tk38k"]
 
 [ext_resource type="Script" uid="uid://dqf7lanaasfjk" path="res://Scripts/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://dvw4yjggjjnmv" path="res://Assets/player_bun.aseprite3.png" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://bfdxm8sj18gsw" path="res://Player/abilities.gd" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://cb0gybucnk3g" path="res://Player/bullet.tscn" id="4_gwnis"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btcbx"]
 radius = 5.0
@@ -25,3 +27,5 @@ shape = SubResource("CapsuleShape2D_btcbx")
 zoom = Vector2(3.5, 3.5)
 
 [node name="Abilities" type="Node2D" parent="."]
+script = ExtResource("3_btcbx")
+bullet = ExtResource("4_gwnis")
