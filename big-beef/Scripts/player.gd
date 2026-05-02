@@ -31,13 +31,12 @@ func _process(_delta: float) -> void:
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
 	).normalized()
-	print(direction)
 	
 func _physics_process( _delta: float ) -> void:
 	move_and_slide()
 	
 func SetDirection() -> bool:
-	if direction == Vector2.ZERO:
+	if direction == Vector2.ZERO || is_strafing:
 		return false
 		
 	var direction_id: int = int(round((direction).angle() / TAU * DIR_4.size()))
