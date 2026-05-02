@@ -1,7 +1,7 @@
 class_name Abilities extends Node2D
 
 @export var bullet : PackedScene
-var shoot_direction : Vector2 = Vector2.RIGHT
+var shoot_direction : Vector2 = Vector2.DOWN
 var prev_direction : Vector2
 var player : Player
 
