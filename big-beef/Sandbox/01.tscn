@@ -9,8 +9,206 @@
 [node name="Player" parent="." instance=ExtResource("1_qlaxg")]
 position = Vector2(602, 323)
 
-[node name="DirtPath" type="Sprite2D" parent="."]
-position = Vector2(584, 262)
+[node name="Path" type="Node" parent="."]
+
+[node name="DirtPath" type="Sprite2D" parent="Path"]
+z_index = -1
+position = Vector2(760, 400)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path"]
+z_index = -1
+position = Vector2(712, 400)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path"]
+z_index = -1
+position = Vector2(664, 400)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path"]
+z_index = -1
+position = Vector2(616, 400)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4"]
+z_index = -1
+position = Vector2(144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath"]
+z_index = -1
+position = Vector2(-48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath"]
+z_index = -1
+position = Vector2(-96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath"]
+z_index = -1
+position = Vector2(-144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4"]
+z_index = -1
+position = Vector2(144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4"]
+z_index = -1
+position = Vector2(96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4"]
+z_index = -1
+position = Vector2(48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(-48, 192)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(-96, 192)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(-144, 192)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(-192, 192)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(144, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4/DirtPath/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4/DirtPath4"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath2" type="Sprite2D" parent="Path/DirtPath4"]
+z_index = -1
+position = Vector2(96, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath3" type="Sprite2D" parent="Path/DirtPath4"]
+z_index = -1
+position = Vector2(48, -48)
+texture = ExtResource("2_n3fxd")
+
+[node name="DirtPath4" type="Sprite2D" parent="Path/DirtPath4"]
+z_index = -1
+position = Vector2(0, -48)
 texture = ExtResource("2_n3fxd")
 
 [node name="Slime" parent="." instance=ExtResource("3_2hbak")]

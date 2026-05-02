@@ -1,24 +1,63 @@
 class_name Player extends CharacterBody2D
 
-@export var speed = 200
+var cardinal_direction: Vector2 = Vector2.DOWN
+const DIR_4: Array[ Vector2 ] = [ Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP ]
+var direction : Vector2 = Vector2.ZERO
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var state_machine: Node = $StateMachine
 
-signal direction_changed
+signal direction_changed(new_direction: Vector2)
 
 var prev_direction : Vector2 = Vector2.ZERO
+var is_strafing : bool = false
 
 var hp : int = 100
 var max_hp : int = 100
 
-func get_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down").normalized()
-	if input_direction != prev_direction:
-		direction_changed.emit(input_direction)
-	prev_direction = input_direction
-	velocity = input_direction * speed
+func _ready() -> void:
+	state_machine.Initialize(self)
+
+func _input( event: InputEvent ):
+	if event.is_action( "strafe" ):
+		if event.is_pressed():
+			is_strafing = true
+		elif event.is_released():
+			is_strafing = false
+
+func _process(_delta: float) -> void:
+	direction = Vector2(
+		Input.get_axis("left", "right"),
+		Input.get_axis("up", "down")
+	).normalized()
+	print(direction)
 	
-func _physics_process(_delta: float) -> void:
-	get_input()
+func _physics_process( _delta: float ) -> void:
 	move_and_slide()
 	
+func SetDirection() -> bool:
+	if direction == Vector2.ZERO:
+		return false
+		
+	var direction_id: int = int(round((direction).angle() / TAU * DIR_4.size()))
+	var new_direction = DIR_4[direction_id]
+	if new_direction == cardinal_direction:
+		return false
+		
+	cardinal_direction = new_direction
+	direction_changed.emit(new_direction)
+	return true
+	
+func UpdateAnimation(state: String) -> void:
+	animation.play(state + "_" + AnimDirection())
+	
+func AnimDirection() -> String:
+	if cardinal_direction == Vector2.DOWN:
+		return "down"
+	elif cardinal_direction == Vector2.UP:
+		return "up"
+	elif cardinal_direction == Vector2.RIGHT:
+		return "right"
+	else:
+		return "left"
