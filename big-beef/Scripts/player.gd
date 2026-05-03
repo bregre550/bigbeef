@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 var cardinal_direction: Vector2 = Vector2.DOWN
-const DIR_4: Array[ Vector2 ] = [ Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP ]
+const DIR_8: Array[ Vector2 ] = [ Vector2.RIGHT, Vector2(1, 1), Vector2.DOWN, Vector2(-1, 1), Vector2.LEFT, Vector2(-1, -1), Vector2.UP, Vector2(1, -1) ]
 var direction : Vector2 = Vector2.ZERO
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -39,8 +39,8 @@ func SetDirection() -> bool:
 	if direction == Vector2.ZERO || is_strafing:
 		return false
 		
-	var direction_id: int = int(round((direction).angle() / TAU * DIR_4.size()))
-	var new_direction = DIR_4[direction_id]
+	var direction_id: int = int(round((direction).angle() / TAU * DIR_8.size()))
+	var new_direction = DIR_8[direction_id]
 	if new_direction == cardinal_direction:
 		return false
 		
@@ -58,5 +58,13 @@ func AnimDirection() -> String:
 		return "up"
 	elif cardinal_direction == Vector2.RIGHT:
 		return "right"
+	elif cardinal_direction == Vector2(1, 1):
+		return "down_right"
+	elif cardinal_direction == Vector2(-1, 1):
+		return "down_left"
+	elif cardinal_direction == Vector2(-1, -1):
+		return "up_left"
+	elif cardinal_direction == Vector2(1, -1):
+		return "up_right"
 	else:
 		return "left"
