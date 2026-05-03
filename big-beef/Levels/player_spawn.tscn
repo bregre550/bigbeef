@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cru4ituq2w2ab"]
+
+[ext_resource type="Script" uid="uid://c6o7eui3h871o" path="res://Scripts/player_spawn.gd" id="1_lyuil"]
+[ext_resource type="Texture2D" uid="uid://cr4a5grlgedi0" path="res://Assets/player_bun_8_dir.png" id="2_a5xvq"]
+
+[node name="PlayerSpawn" type="Node2D"]
+script = ExtResource("1_lyuil")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("2_a5xvq")
+hframes = 8
+vframes = 8

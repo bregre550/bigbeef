@@ -15,6 +15,12 @@ run/main_scene="uid://2rku280p86gm"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LevelManager="*res://00_Globals/global_level_manager.gd"
+PlayerManager="*res://00_Globals/global_player_manager.gd"
+SceneTransition="*res://GUI/scene_transition/scene_transition.tscn"
+
 [display]
 
 window/size/viewport_width=1280
@@ -66,6 +72,14 @@ strafe={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":4,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="PlayerHurt"
+2d_physics/layer_3="PlayerInteract"
+2d_physics/layer_5="Walls"
+2d_physics/layer_9="Enemy"
 
 [rendering]
 

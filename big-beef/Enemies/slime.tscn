@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://ci4cji8qbj2u"]
+[gd_scene load_steps=19 format=3 uid="uid://ci4cji8qbj2u"]
 
 [ext_resource type="Texture2D" uid="uid://c4o1tww2ah8fu" path="res://Assets/enemy_slime.png" id="1_00swj"]
 [ext_resource type="Script" uid="uid://bhfhtb18a6f8v" path="res://Scripts/enemy.gd" id="1_87lq7"]
 [ext_resource type="Script" uid="uid://scc1vrorujad" path="res://Scripts/enemy_state_machine.gd" id="2_87lq7"]
 [ext_resource type="Script" uid="uid://dlg02m8ar0i0c" path="res://Scripts/enemy_state_idle.gd" id="3_ora3b"]
 [ext_resource type="Script" uid="uid://cbdasn321msi" path="res://Scripts/enemy_state_wander.gd" id="4_0tjn4"]
+[ext_resource type="Script" uid="uid://bhrylx37ub6fe" path="res://Scripts/enemy_state_chase.gd" id="6_0tjn4"]
+[ext_resource type="PackedScene" uid="uid://dyd6qtv3bepbp" path="res://Enemies/vision_area.tscn" id="6_ora3b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87lq7"]
 radius = 3.0
@@ -171,6 +173,9 @@ _data = {
 }
 
 [node name="Slime" type="CharacterBody2D"]
+collision_layer = 256
+collision_mask = 16
+motion_mode = 1
 script = ExtResource("1_87lq7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -201,3 +206,17 @@ after_idle_state = NodePath("../Wander")
 [node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("4_0tjn4")
 next_state = NodePath("../Idle")
+
+[node name="Chase" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("vision_area", "next_state")]
+script = ExtResource("6_0tjn4")
+chase_speed = 55.0
+vision_area = NodePath("../../VisionArea")
+state_aggro_duration = 2.0
+next_state = NodePath("../Idle")
+
+[node name="VisionArea" parent="." instance=ExtResource("6_ora3b")]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea"]
+polygon = PackedVector2Array(-10, 0, 10, 0, 80, 80, -80, 80)

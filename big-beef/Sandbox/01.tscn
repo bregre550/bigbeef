@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://2rku280p86gm"]
 
-[ext_resource type="PackedScene" uid="uid://bepupgc7tk38k" path="res://Player/player.tscn" id="1_qlaxg"]
+[ext_resource type="PackedScene" uid="uid://cru4ituq2w2ab" path="res://Levels/player_spawn.tscn" id="1_2hbak"]
 [ext_resource type="Texture2D" uid="uid://b5ylcq84oxjeq" path="res://Assets/dirt_path.png" id="2_n3fxd"]
 [ext_resource type="PackedScene" uid="uid://ci4cji8qbj2u" path="res://Enemies/slime.tscn" id="3_2hbak"]
 
 [node name="01" type="Node2D"]
+y_sort_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_qlaxg")]
-position = Vector2(602, 323)
+[node name="PlayerSpawn" parent="." instance=ExtResource("1_2hbak")]
+position = Vector2(630, 350)
 
 [node name="Path" type="Node" parent="."]
 
