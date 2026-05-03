@@ -17,6 +17,7 @@ var hp : int = 100
 var max_hp : int = 100
 
 func _ready() -> void:
+	PlayerManager.player = self
 	state_machine.Initialize(self)
 
 func _input( event: InputEvent ):
