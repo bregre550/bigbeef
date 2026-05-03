@@ -1,3 +1,16 @@
 ToDo
 
-Add strafing mechanic while shooting 
+Add strafing mechanic while shooting x
+8 way movement x
+aggro and attack from enemy x
+
+player and enemy interaction - hit and hurt, stun
+	enemy is now attacking and shooting, need stun
+	player needs stun
+	hurt boxes
+	hit boxes
+finish attack animations
+
+
+
+a terrible mold has taken over the carrot crops and beef needs to save the day

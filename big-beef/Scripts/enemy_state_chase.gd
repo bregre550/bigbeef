@@ -8,8 +8,11 @@ class_name EnemyStateChase extends EnemyState
 @export var vision_area: VisionArea
 #@export var attack_area: HurtBox
 @export var state_aggro_duration: float = 0.5
+@export var shoot_delay: float = 2.0
 @export var next_state: EnemyState
+@onready var attack: EnemyStateAttack = $"../Attack"
 
+var _since_last_shot_timer: float = 0.0
 var _timer: float = 0.0
 var _direction: Vector2
 var _can_see_player: bool = false
@@ -21,6 +24,7 @@ func init() -> void:
 	
 func enter() -> void:
 	_timer = state_aggro_duration
+	_since_last_shot_timer = shoot_delay
 	enemy.update_animation(anim_name)
 	#if attack_area:
 		#attack_area.monitoring = true
@@ -28,7 +32,8 @@ func enter() -> void:
 func exit() -> void:
 	#if attack_area:
 		#attack_area.monitoring = false
-	_can_see_player = false
+	#_can_see_player = false
+	pass
 	
 func process(_delta: float) -> EnemyState:
 	var new_dir: Vector2 = enemy.global_position.direction_to(PlayerManager.player.global_position)
@@ -36,6 +41,12 @@ func process(_delta: float) -> EnemyState:
 	enemy.velocity = _direction * chase_speed
 	if enemy.set_direction(_direction):
 		enemy.update_animation(anim_name)
+	
+	_since_last_shot_timer -= _delta
+	if _since_last_shot_timer <= 0:
+		_since_last_shot_timer = shoot_delay
+		return attack
+	
 	if _can_see_player == false:
 		_timer -= _delta
 		if _timer <= 0:
@@ -54,5 +65,4 @@ func _on_player_enter() -> void:
 	state_machine.change_state(self)
 	
 func _on_player_exit() -> void:
-	print("exiting")
 	_can_see_player = false
