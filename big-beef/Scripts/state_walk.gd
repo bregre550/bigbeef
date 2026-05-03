@@ -19,8 +19,7 @@ func Process( _delta: float ) -> State:
 	if player.is_strafing:
 		move_speed = strafe_speed
 	else:
-		move_speed = normal_speed
-		
+		move_speed = normal_speed		
 	
 	player.velocity = player.direction * move_speed
 	
