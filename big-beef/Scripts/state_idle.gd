@@ -3,7 +3,7 @@ class_name State_Idle extends State
 @onready var walk: State = $"../Walk"
 
 func Enter() -> void:
-	player.UpdateAnimation( "idle" )
+	player.update_animation( "idle" )
 	
 func Exit() -> void:
 	pass
