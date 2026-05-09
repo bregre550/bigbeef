@@ -246,6 +246,7 @@ _data = {
 [node name="Slime" type="CharacterBody2D"]
 collision_layer = 256
 collision_mask = 16
+motion_mode = 1
 script = ExtResource("1_87lq7")
 
 [node name="HurtBox" parent="." instance=ExtResource("2_v0fv8")]
