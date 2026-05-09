@@ -2,7 +2,7 @@ class_name State_Stun extends State
 
 @export var knockback_speed: float = 200.0
 @export var decelerate_speed: float = 10.0
-@export var invulnerable_duration: float = .5
+@export var invulnerable_duration: float = 1.0
 
 var hurt_box: HurtBox
 var direction: Vector2
@@ -22,7 +22,7 @@ func Enter() -> void:
 	player.velocity = direction * -knockback_speed
 	player.set_direction()
 	player.update_animation("stun")
-	player.make_invulernable(invulnerable_duration)
+	player.make_invulnerable(invulnerable_duration)
 	player.effect_animation_player.play("damaged")
 		
 	if player.is_strafing:
