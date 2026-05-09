@@ -2,6 +2,16 @@ class_name Player extends CharacterBody2D
 
 var cardinal_direction: Vector2 = Vector2.DOWN
 const DIR_8: Array[ Vector2 ] = [ Vector2.RIGHT, Vector2(1, 1), Vector2.DOWN, Vector2(-1, 1), Vector2.LEFT, Vector2(-1, -1), Vector2.UP, Vector2(1, -1) ]
+const OPP_DIR = {
+	"idle_right": Vector2.LEFT,
+	"idle_down_right": Vector2(-1, -1),
+	"idle_down": Vector2.UP,
+	"idle_down_left": Vector2(1, -1),
+	"idle_left": Vector2.RIGHT,
+	"idle_up_left": Vector2(1, 1),
+	"idle_up": Vector2.DOWN,
+	"idle_up_right": Vector2(-1, 1)
+}
 var direction : Vector2 = Vector2.ZERO
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -30,9 +40,15 @@ func _input( event: InputEvent ):
 	
 	if event.is_action("flip strafe"):
 		if event.is_pressed():
-			direction *= -1
-			if SetDirection():
-				UpdateAnimation("walk")
+			if direction == Vector2.ZERO:
+				direction = OPP_DIR[animation.assigned_animation]
+				if SetDirection():
+					UpdateAnimation("idle")
+			else:
+				direction *= -1
+				print(direction)
+				if SetDirection():
+					UpdateAnimation("walk")
 			is_strafing = true
 		elif event.is_released() and not Input.is_action_pressed("strafe"):
 			is_strafing = false
@@ -47,7 +63,7 @@ func _physics_process( _delta: float ) -> void:
 	move_and_slide()
 	
 func SetDirection() -> bool:
-	if direction == Vector2.ZERO || is_strafing:
+	if is_strafing:
 		return false
 	
 	var direction_id: int = int(round((direction).angle() / TAU * DIR_8.size()))
