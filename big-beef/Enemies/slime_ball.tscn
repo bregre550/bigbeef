@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://clf35hvgl62tj"]
+[gd_scene load_steps=6 format=3 uid="uid://clf35hvgl62tj"]
 
 [ext_resource type="Script" uid="uid://4mhxb1rlof4j" path="res://Scripts/bullet.gd" id="1_bhyma"]
 [ext_resource type="Texture2D" uid="uid://bxd4v8co3n65f" path="res://Assets/slime_bullet.png" id="2_w2yma"]
+[ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="3_ewk54"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlrgf"]
+radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d7yj7"]
 radius = 2.0
@@ -15,5 +19,12 @@ speed = 300
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_w2yma")
 
+[node name="HurtBox" parent="Sprite2D" instance=ExtResource("3_ewk54")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HurtBox"]
+shape = SubResource("CircleShape2D_dlrgf")
+debug_color = Color(1, 0, 0, 0.5294118)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_d7yj7")
+debug_color = Color(0, 0.6, 0.69803923, 0)
