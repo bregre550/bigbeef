@@ -23,7 +23,7 @@ func init() -> void:
 		vision_area.player_exited.connect(_on_player_exit)
 	
 func enter() -> void:
-	_timer = state_aggro_duration
+	_timer = attack.chase_time
 	_since_last_shot_timer = shoot_delay
 	enemy.update_animation(anim_name)
 	#if attack_area:
@@ -32,7 +32,6 @@ func enter() -> void:
 func exit() -> void:
 	#if attack_area:
 		#attack_area.monitoring = false
-	#_can_see_player = false
 	pass
 	
 func process(_delta: float) -> EnemyState:
@@ -41,18 +40,20 @@ func process(_delta: float) -> EnemyState:
 	enemy.velocity = _direction * chase_speed
 	if enemy.set_direction(_direction):
 		enemy.update_animation(anim_name)
-	
-	_since_last_shot_timer -= _delta
-	if _since_last_shot_timer <= 0:
-		_since_last_shot_timer = shoot_delay
-		return attack
-	
+
 	if _can_see_player == false:
 		_timer -= _delta
 		if _timer <= 0:
 			return next_state
 	else:
 		_timer = state_aggro_duration
+	
+	if _since_last_shot_timer <= 0:
+		attack.chase_time = _timer
+		return attack
+	else:
+		_since_last_shot_timer -= _delta
+	
 	return null
 
 func physics(_delta: float) -> EnemyState:

@@ -10,23 +10,33 @@ var direction : Vector2 = Vector2.ZERO
 
 signal direction_changed(new_direction: Vector2)
 
-var prev_direction : Vector2 = Vector2.ZERO
-var is_strafing : bool = false
+var prev_direction: Vector2 = Vector2.ZERO
+var turn_rate: float = 0.25
+var is_strafing: bool = false
 
-var hp : int = 100
-var max_hp : int = 100
+var hp: int = 100
+var max_hp: int = 100
 
 func _ready() -> void:
 	PlayerManager.player = self
 	state_machine.Initialize(self)
 
 func _input( event: InputEvent ):
-	if event.is_action( "strafe" ):
+	if event.is_action("strafe"):
 		if event.is_pressed():
 			is_strafing = true
-		elif event.is_released():
+		elif event.is_released() and not Input.is_action_pressed("flip strafe"):
 			is_strafing = false
-
+	
+	if event.is_action("flip strafe"):
+		if event.is_pressed():
+			direction *= -1
+			if SetDirection():
+				UpdateAnimation("walk")
+			is_strafing = true
+		elif event.is_released() and not Input.is_action_pressed("strafe"):
+			is_strafing = false
+			
 func _process(_delta: float) -> void:
 	direction = Vector2(
 		Input.get_axis("left", "right"),
@@ -39,7 +49,7 @@ func _physics_process( _delta: float ) -> void:
 func SetDirection() -> bool:
 	if direction == Vector2.ZERO || is_strafing:
 		return false
-		
+	
 	var direction_id: int = int(round((direction).angle() / TAU * DIR_8.size()))
 	var new_direction = DIR_8[direction_id]
 	if new_direction == cardinal_direction:

@@ -279,7 +279,9 @@ next_state = NodePath("../Idle")
 
 [node name="Chase" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("vision_area", "next_state")]
 script = ExtResource("6_0tjn4")
+anim_name = null
 chase_speed = 55.0
+turn_rate = null
 vision_area = NodePath("../../VisionArea")
 state_aggro_duration = 2.0
 shoot_delay = 1.5

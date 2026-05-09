@@ -9,6 +9,8 @@ var attacking: bool = false
 @onready var animation: AnimationPlayer = $"../../AnimationPlayer"
 @onready var chase: EnemyStateChase = $"../Chase"
 
+var chase_time : float
+
 func init() -> void:
 	pass
 	
