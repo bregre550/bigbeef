@@ -5,6 +5,7 @@ var attacking: bool = false
 @export var anim_name: String = "attack"
 @export_range(1, 20, 0.5) var decelerate_speed: float = 5.0
 @export var slime_ball: PackedScene
+@export var aim_spread: float = 5.0
 
 @onready var animation: AnimationPlayer = $"../../AnimationPlayer"
 @onready var chase: EnemyStateChase = $"../Chase"
@@ -22,7 +23,9 @@ func enter() -> void:
 	var b = slime_ball.instantiate()
 	get_tree().root.add_child(b)
 	b.global_position = enemy.global_position
-	b.shoot(enemy.direction)
+	var spread: float = deg_to_rad(randf_range(-aim_spread, aim_spread))
+	var bullet_direction: Vector2 = enemy.direction.rotated(spread)
+	b.shoot(bullet_direction)
 	
 func exit() -> void:
 	animation.animation_finished.disconnect(_end_attack)
