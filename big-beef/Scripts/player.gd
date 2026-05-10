@@ -68,7 +68,8 @@ func _input( event: InputEvent ):
 				direction *= -1
 				if set_direction():
 					if animation.current_animation.contains("stun"): 
-						update_animation("stun")
+						#update_animation("stun")
+						pass
 					else:
 						update_animation("walk")
 			is_strafing = true

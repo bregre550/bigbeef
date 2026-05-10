@@ -305,4 +305,4 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea"]
-polygon = PackedVector2Array(-10, 0, 10, 0, 80, 80, -80, 80)
+polygon = PackedVector2Array(-16, 0, 16, 0, 80, 120, -80, 120)
