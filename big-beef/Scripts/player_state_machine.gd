@@ -38,9 +38,14 @@ func Initialize(_player : Player) -> void:
 func ChangeState( new_state: State) -> void:
 	if new_state == null || new_state == current_state:
 		return
+		
 	if current_state:
 		current_state.Exit()
-		
+		#print("Exiting current state:", current_state)
+		#print("Incoming state:", new_state)
+	
+
 	prev_state = current_state
 	current_state = new_state
 	current_state.Enter() 
+	#print("entering new state:", current_state)

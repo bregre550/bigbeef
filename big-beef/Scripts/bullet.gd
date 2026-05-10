@@ -1,4 +1,4 @@
-class_name SlimeBall extends CharacterBody2D
+class_name Bullet extends CharacterBody2D
 
 @export var speed : int = 250
 
@@ -13,6 +13,5 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	lifetime -= delta
 	if lifetime <= 0:
-		queue_free()
-	
+		queue_free()	
 	

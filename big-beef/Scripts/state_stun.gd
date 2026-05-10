@@ -1,6 +1,6 @@
 class_name State_Stun extends State
 
-@export var knockback_speed: float = 200.0
+@export var knockback_speed: float = 250.0
 @export var decelerate_speed: float = 5.0
 @export var invulnerable_duration: float = 1.5
 
@@ -15,11 +15,13 @@ func init() -> void:
 	player.player_damaged.connect(_player_damaged)
 	
 func Enter() -> void:
+	#print("entered state stun")
 	player.animation.animation_finished.connect(_animation_finished)
 	player.make_invulnerable(invulnerable_duration)
 	direction = player.global_position.direction_to(hurt_box.global_position)
 	player.velocity = direction * -knockback_speed
 	player.set_direction()
+	#print("playing stun animation")
 	player.update_animation("stun")
 	
 	player.effect_animation_player.play("damaged")
@@ -45,4 +47,5 @@ func _player_damaged(_hurt_box: HurtBox) -> void:
 	state_machine.ChangeState(self)
 	
 func _animation_finished(_a: String) -> void:
-	next_state = idle
+	#print("ANIMATION FINISHED")
+	next_state = state_machine.prev_state

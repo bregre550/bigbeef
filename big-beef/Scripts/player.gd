@@ -10,7 +10,23 @@ const OPP_DIR = {
 	"idle_left": Vector2.RIGHT,
 	"idle_up_left": Vector2(1, 1),
 	"idle_up": Vector2.DOWN,
-	"idle_up_right": Vector2(-1, 1)
+	"idle_up_right": Vector2(-1, 1),
+	"walk_right": Vector2.LEFT,
+	"walk_down_right": Vector2(-1, -1),
+	"walk_down": Vector2.UP,
+	"walk_down_left": Vector2(1, -1),
+	"walk_left": Vector2.RIGHT,
+	"walk_up_left": Vector2(1, 1),
+	"walk_up": Vector2.DOWN,
+	"walk_up_right": Vector2(-1, 1),
+	"stun_right": Vector2.LEFT,
+	"stun_down_right": Vector2(-1, -1),
+	"stun_down": Vector2.UP,
+	"stun_down_left": Vector2(1, -1),
+	"stun_left": Vector2.RIGHT,
+	"stun_up_left": Vector2(1, 1),
+	"stun_up": Vector2.DOWN,
+	"stun_up_right": Vector2(-1, 1),
 }
 var direction : Vector2 = Vector2.ZERO
 
@@ -51,7 +67,10 @@ func _input( event: InputEvent ):
 			else:
 				direction *= -1
 				if set_direction():
-					update_animation("walk")
+					if animation.current_animation.contains("stun"): 
+						update_animation("stun")
+					else:
+						update_animation("walk")
 			is_strafing = true
 		elif event.is_released() and not Input.is_action_pressed("strafe"):
 			is_strafing = false
