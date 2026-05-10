@@ -52,6 +52,9 @@ func _ready() -> void:
 	hit_box.damaged.connect(_take_damage)
 
 func _input( event: InputEvent ):
+	if animation.current_animation.contains("attack"):
+		return
+		
 	if event.is_action("strafe"):
 		if event.is_pressed():
 			is_strafing = true
