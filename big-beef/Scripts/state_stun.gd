@@ -10,11 +10,14 @@ var direction: Vector2
 var next_state: State = null
 
 @onready var idle: State = $"../Idle"
+@onready var attack: State_Attack = $"../Attack"
 
 func init() -> void:
 	player.player_damaged.connect(_player_damaged)
 	
 func Enter() -> void:
+	if attack.animation.is_playing():
+		attack.animation.stop()
 	#print("entered state stun")
 	player.animation.animation_finished.connect(_animation_finished)
 	player.make_invulnerable(invulnerable_duration)
@@ -48,4 +51,4 @@ func _player_damaged(_hurt_box: HurtBox) -> void:
 	
 func _animation_finished(_a: String) -> void:
 	#print("ANIMATION FINISHED")
-	next_state = state_machine.prev_state
+	next_state = idle

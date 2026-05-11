@@ -215,4 +215,4 @@ position = Vector2(0, -48)
 texture = ExtResource("2_n3fxd")
 
 [node name="Slime" parent="." instance=ExtResource("3_2hbak")]
-position = Vector2(581, 218)
+position = Vector2(445, 206)
