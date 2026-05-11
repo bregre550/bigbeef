@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://ci4cji8qbj2u"]
+[gd_scene load_steps=28 format=3 uid="uid://ci4cji8qbj2u"]
 
 [ext_resource type="Texture2D" uid="uid://c4o1tww2ah8fu" path="res://Assets/enemy_slime.png" id="1_00swj"]
 [ext_resource type="Script" uid="uid://bhfhtb18a6f8v" path="res://Scripts/enemy.gd" id="1_87lq7"]
 [ext_resource type="Script" uid="uid://scc1vrorujad" path="res://Scripts/enemy_state_machine.gd" id="2_87lq7"]
+[ext_resource type="PackedScene" uid="uid://drlerav7dnh1w" path="res://GeneralNodes/hit_box.tscn" id="2_kqei6"]
 [ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="2_v0fv8"]
 [ext_resource type="Script" uid="uid://dlg02m8ar0i0c" path="res://Scripts/enemy_state_idle.gd" id="3_ora3b"]
 [ext_resource type="Script" uid="uid://cbdasn321msi" path="res://Scripts/enemy_state_wander.gd" id="4_0tjn4"]
@@ -10,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dyd6qtv3bepbp" path="res://Enemies/vision_area.tscn" id="6_ora3b"]
 [ext_resource type="Script" uid="uid://64hnmpwub2v3" path="res://Scripts/enemy_state_attack.gd" id="7_0qq8p"]
 [ext_resource type="PackedScene" uid="uid://clf35hvgl62tj" path="res://Enemies/slime_ball.tscn" id="8_amke3"]
+[ext_resource type="Script" uid="uid://df8bxa4rsqu3f" path="res://Scripts/enemy_state_stun.gd" id="11_aq8il"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87lq7"]
 radius = 3.0
@@ -249,6 +251,9 @@ collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_87lq7")
 
+[node name="HitBox" parent="." instance=ExtResource("2_kqei6")]
+collision_layer = 256
+
 [node name="HurtBox" parent="." instance=ExtResource("2_v0fv8")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -299,6 +304,9 @@ next_state = NodePath("../Idle")
 [node name="Attack" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("7_0qq8p")
 slime_ball = ExtResource("8_amke3")
+
+[node name="Stun" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("11_aq8il")
 
 [node name="VisionArea" parent="." instance=ExtResource("6_ora3b")]
 collision_layer = 0
