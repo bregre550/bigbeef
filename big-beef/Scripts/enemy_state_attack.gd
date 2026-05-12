@@ -16,16 +16,16 @@ func init() -> void:
 	pass
 	
 func enter() -> void:
-	enemy.update_animation(anim_name)
-	animation.animation_finished.connect(_end_attack)
-	attacking = true
-	
 	var b = slime_ball.instantiate()
 	get_tree().root.add_child(b)
 	b.global_position = enemy.global_position
 	var spread: float = deg_to_rad(randf_range(-aim_spread, aim_spread))
 	var bullet_direction: Vector2 = enemy.direction.rotated(spread)
 	b.shoot(bullet_direction)
+	
+	enemy.update_animation(anim_name)
+	animation.animation_finished.connect(_end_attack)
+	attacking = true
 	
 func exit() -> void:
 	animation.animation_finished.disconnect(_end_attack)
