@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ci4cji8qbj2u"]
+[gd_scene load_steps=32 format=3 uid="uid://ci4cji8qbj2u"]
 
 [ext_resource type="Texture2D" uid="uid://c4o1tww2ah8fu" path="res://Assets/enemy_slime.png" id="1_00swj"]
 [ext_resource type="Script" uid="uid://bhfhtb18a6f8v" path="res://Scripts/enemy.gd" id="1_87lq7"]
@@ -228,6 +228,70 @@ tracks/0/keys = {
 "values": [3, 4, 5, 3]
 }
 
+[sub_resource type="Animation" id="Animation_3t86m"]
+resource_name = "stun_down"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_wgl02"]
+resource_name = "stun_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_jiijo"]
+resource_name = "stun_left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_o4ycw"]
+resource_name = "stun_right"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l26av"]
 _data = {
 &"RESET": SubResource("Animation_87lq7"),
@@ -239,6 +303,10 @@ _data = {
 &"idle_left": SubResource("Animation_kqei6"),
 &"idle_right": SubResource("Animation_aq8il"),
 &"idle_up": SubResource("Animation_mky3p"),
+&"stun_down": SubResource("Animation_3t86m"),
+&"stun_left": SubResource("Animation_jiijo"),
+&"stun_right": SubResource("Animation_o4ycw"),
+&"stun_up": SubResource("Animation_wgl02"),
 &"walk_down": SubResource("Animation_ora3b"),
 &"walk_left": SubResource("Animation_0qq8p"),
 &"walk_right": SubResource("Animation_amke3"),
@@ -253,6 +321,12 @@ script = ExtResource("1_87lq7")
 
 [node name="HitBox" parent="." instance=ExtResource("2_kqei6")]
 collision_layer = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 1)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_87lq7")
+debug_color = Color(0, 0.6337686, 0.42590782, 0)
 
 [node name="HurtBox" parent="." instance=ExtResource("2_v0fv8")]
 
@@ -278,7 +352,6 @@ debug_color = Color(0.39215687, 0.47843137, 0.972549, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_l26av")
 }
-autoplay = "idle_down"
 
 [node name="EnemyStateMachine" type="Node" parent="."]
 script = ExtResource("2_87lq7")
@@ -291,11 +364,13 @@ after_idle_state = NodePath("../Wander")
 script = ExtResource("4_0tjn4")
 next_state = NodePath("../Idle")
 
+[node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("11_aq8il")
+next_state = NodePath("../Chase")
+
 [node name="Chase" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("vision_area", "next_state")]
 script = ExtResource("6_0tjn4")
-anim_name = null
 chase_speed = 55.0
-turn_rate = null
 vision_area = NodePath("../../VisionArea")
 state_aggro_duration = 2.0
 shoot_delay = 1.5
@@ -304,9 +379,6 @@ next_state = NodePath("../Idle")
 [node name="Attack" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("7_0qq8p")
 slime_ball = ExtResource("8_amke3")
-
-[node name="Stun" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("11_aq8il")
 
 [node name="VisionArea" parent="." instance=ExtResource("6_ora3b")]
 collision_layer = 0

@@ -43,17 +43,16 @@ func process(_delta: float) -> EnemyState:
 
 	if _can_see_player == false:
 		_timer -= _delta
-		if _timer <= 0:
-			return next_state
-	else:
-		_timer = state_aggro_duration
+
+		
+	if _timer <= 0:
+		return next_state
 	
 	if _since_last_shot_timer <= 0:
 		attack.chase_time = _timer
 		return attack
-	else:
-		_since_last_shot_timer -= _delta
 	
+	_since_last_shot_timer -= _delta	
 	return null
 
 func physics(_delta: float) -> EnemyState:
