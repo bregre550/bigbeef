@@ -12,19 +12,19 @@ class_name EnemyStateChase extends EnemyState
 @export var next_state: EnemyState
 @onready var attack: EnemyStateAttack = $"../Attack"
 
-var _since_last_shot_timer: float = 0.0
-var _timer: float = 0.0
+var _aggro_timer: float = 0.0
+var _shoot_timer: float = 0.0
 var _direction: Vector2
 var _can_see_player: bool = false
 
 func init() -> void:
+	_aggro_timer = state_aggro_duration
 	if vision_area:
 		vision_area.player_entered.connect(_on_player_enter)
 		vision_area.player_exited.connect(_on_player_exit)
 	
 func enter() -> void:
-	_timer = attack.chase_time
-	_since_last_shot_timer = shoot_delay
+	_shoot_timer = shoot_delay
 	enemy.update_animation(anim_name)
 	#if attack_area:
 		#attack_area.monitoring = true
@@ -42,17 +42,17 @@ func process(_delta: float) -> EnemyState:
 		enemy.update_animation(anim_name)
 
 	if _can_see_player == false:
-		_timer -= _delta
+		_aggro_timer -= _delta
 
+	_shoot_timer -= _delta
 		
-	if _timer <= 0:
+	if _aggro_timer <= 0:
+		_aggro_timer = state_aggro_duration
 		return next_state
 	
-	if _since_last_shot_timer <= 0:
-		attack.chase_time = _timer
+	if _shoot_timer <= 0:
 		return attack
 	
-	_since_last_shot_timer -= _delta	
 	return null
 
 func physics(_delta: float) -> EnemyState:
@@ -60,8 +60,8 @@ func physics(_delta: float) -> EnemyState:
 	
 func _on_player_enter() -> void:
 	_can_see_player = true
-	#if (state_machine.current_state is EnemeyStateStun or state_machine.current_state is EnemeyStateDestroy):
-		#return
+	if (state_machine.current_state is EnemyStateStun): # or state_machine.current_state is EnemyStateDestroy):
+		return
 	state_machine.change_state(self)
 	
 func _on_player_exit() -> void:
