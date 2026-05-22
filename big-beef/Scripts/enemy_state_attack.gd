@@ -31,7 +31,6 @@ func exit() -> void:
 	animation.animation_finished.disconnect(_end_attack)
 	attacking = false
 	
-	
 func process(_delta: float) -> EnemyState:
 	enemy.velocity -= enemy.velocity * decelerate_speed * _delta
 	

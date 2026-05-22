@@ -33,7 +33,6 @@ func enter() -> void:
 	_animation_finished = false
 	enemy.update_animation(anim_name)
 	enemy.animation_player.animation_finished.connect(_on_animation_finished)
-	print("animation started")
 
 ## What happens when the enemy exits this State?
 func exit() -> void:
@@ -56,4 +55,3 @@ func _on_enemy_damaged(hurt_box : HurtBox) -> void:
 	
 func _on_animation_finished(_a : String) -> void:
 	_animation_finished = true
-	print("animation finished")
