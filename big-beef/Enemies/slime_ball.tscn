@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://clf35hvgl62tj"]
+[gd_scene load_steps=7 format=3 uid="uid://clf35hvgl62tj"]
 
 [ext_resource type="Script" uid="uid://bron76fcnaeqi" path="res://Scripts/slime_ball.gd" id="1_ewk54"]
 [ext_resource type="Texture2D" uid="uid://bxd4v8co3n65f" path="res://Assets/slime_bullet.png" id="2_w2yma"]
 [ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="3_ewk54"]
+[ext_resource type="PackedScene" uid="uid://d4ndtdf4lskug" path="res://GeneralNodes/bounce_box.tscn" id="4_dlrgf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlrgf"]
 radius = 2.0
@@ -14,7 +15,6 @@ radius = 2.0
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_ewk54")
-speed = 300
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_w2yma")
@@ -28,3 +28,12 @@ debug_color = Color(1, 0, 0, 0.5294118)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_d7yj7")
 debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="BounceBox" parent="." instance=ExtResource("4_dlrgf")]
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceBox"]
+shape = SubResource("CircleShape2D_dlrgf")
+debug_color = Color(1, 0, 0, 0.5294118)

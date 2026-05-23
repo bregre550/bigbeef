@@ -27,6 +27,14 @@ const OPP_DIR = {
 	"stun_up_left": Vector2(1, 1),
 	"stun_up": Vector2.DOWN,
 	"stun_up_right": Vector2(-1, 1),
+	"attack_right": Vector2.LEFT,
+	"attack_down_right": Vector2(-1, -1),
+	"attack_down": Vector2.UP,
+	"attack_down_left": Vector2(1, -1),
+	"attack_left": Vector2.RIGHT,
+	"attack_up_left": Vector2(1, 1),
+	"attack_up": Vector2.DOWN,
+	"attack_up_right": Vector2(-1, 1),
 }
 var direction : Vector2 = Vector2.ZERO
 
@@ -53,6 +61,9 @@ func _ready() -> void:
 
 func _input( event: InputEvent ):
 	if animation.current_animation.contains("attack"):
+		if event.is_action("flip strafe"):
+			if event.is_released():
+				is_strafing = false
 		return
 		
 	if event.is_action("strafe"):
