@@ -35,3 +35,15 @@ position = Vector2(630, 350)
 
 [node name="Slime" parent="." instance=ExtResource("3_2hbak")]
 position = Vector2(445, 206)
+
+[node name="Slime2" parent="." instance=ExtResource("3_2hbak")]
+position = Vector2(1204, 140)
+
+[node name="Slime5" parent="." instance=ExtResource("3_2hbak")]
+position = Vector2(1067, 194)
+
+[node name="Slime3" parent="." instance=ExtResource("3_2hbak")]
+position = Vector2(1086, 52)
+
+[node name="Slime4" parent="." instance=ExtResource("3_2hbak")]
+position = Vector2(76, 54)
