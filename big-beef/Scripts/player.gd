@@ -61,7 +61,7 @@ func _ready() -> void:
 
 func _input( event: InputEvent ):
 	if animation.current_animation.contains("attack") or animation.current_animation.contains("dodge"):
-		if event.is_action("flip strafe"):
+		if event.is_action("flip strafe") or event.is_action("strafe"):
 			if event.is_released():
 				is_strafing = false
 		return
