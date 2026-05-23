@@ -9,8 +9,8 @@
 [ext_resource type="Script" uid="uid://cbdasn321msi" path="res://Scripts/enemy_state_wander.gd" id="4_0tjn4"]
 [ext_resource type="Script" uid="uid://bhrylx37ub6fe" path="res://Scripts/enemy_state_chase.gd" id="6_0tjn4"]
 [ext_resource type="PackedScene" uid="uid://dyd6qtv3bepbp" path="res://Enemies/vision_area.tscn" id="6_ora3b"]
+[ext_resource type="Script" uid="uid://64hnmpwub2v3" path="res://Scripts/enemy_state_attack.gd" id="7_0qq8p"]
 [ext_resource type="PackedScene" uid="uid://clf35hvgl62tj" path="res://Enemies/slime_ball.tscn" id="8_amke3"]
-[ext_resource type="Script" uid="uid://64hnmpwub2v3" path="res://Scripts/enemy_state_attack.gd" id="10_kqei6"]
 [ext_resource type="Script" uid="uid://df8bxa4rsqu3f" path="res://Scripts/enemy_state_stun.gd" id="11_aq8il"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87lq7"]
@@ -381,7 +381,7 @@ shoot_delay = 1.5
 next_state = NodePath("../Idle")
 
 [node name="Attack" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("10_kqei6")
+script = ExtResource("7_0qq8p")
 slime_ball = ExtResource("8_amke3")
 
 [node name="VisionArea" parent="." instance=ExtResource("6_ora3b")]

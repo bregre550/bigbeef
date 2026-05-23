@@ -10,6 +10,7 @@ class_name EnemyStateChase extends EnemyState
 @export var state_aggro_duration: float = 0.5
 @export var shoot_delay: float = 2.0
 @export var next_state: EnemyState
+
 @onready var attack: EnemyStateAttack = $"../Attack"
 
 var _aggro_timer: float = 0.0
