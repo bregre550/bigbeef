@@ -60,7 +60,7 @@ func _ready() -> void:
 	hit_box.damaged.connect(_take_damage)
 
 func _input( event: InputEvent ):
-	if animation.current_animation.contains("attack"):
+	if animation.current_animation.contains("attack") or animation.current_animation.contains("dodge"):
 		if event.is_action("flip strafe"):
 			if event.is_released():
 				is_strafing = false
