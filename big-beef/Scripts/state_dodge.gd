@@ -2,7 +2,7 @@ class_name State_Dodge extends State
 
 var dodging: bool = false
 
-@export var dodge_speed: float = 150.0
+@export var dodge_speed: float = 125.0
 @export var dodge_duration: float = 0.3
 
 @onready var animation: AnimationPlayer = $"../../Sprite2D/AttackSprite/AttackAnimationPlayer"
