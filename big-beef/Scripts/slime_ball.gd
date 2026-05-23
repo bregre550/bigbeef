@@ -3,7 +3,7 @@ class_name SlimeBall extends CharacterBody2D
 @onready var hurt_box: HurtBox = $Sprite2D/HurtBox
 @onready var bounce_box: BounceBox = $BounceBox
 
-@export var speed : int = 150
+@export var speed : float = 225.0
 
 var direction : Vector2 = Vector2.ZERO
 var lifetime : float = 3.0	
