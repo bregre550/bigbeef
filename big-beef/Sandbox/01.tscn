@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://2rku280p86gm"]
+[gd_scene load_steps=8 format=3 uid="uid://2rku280p86gm"]
 
 [ext_resource type="PackedScene" uid="uid://cru4ituq2w2ab" path="res://Levels/player_spawn.tscn" id="1_2hbak"]
 [ext_resource type="Script" uid="uid://du3aqt6lic1iv" path="res://Scripts/level.gd" id="1_vxobl"]
 [ext_resource type="Texture2D" uid="uid://b5ylcq84oxjeq" path="res://Assets/dirt_path.png" id="2_n3fxd"]
 [ext_resource type="PackedScene" uid="uid://ci4cji8qbj2u" path="res://Enemies/slime.tscn" id="3_2hbak"]
+[ext_resource type="PackedScene" uid="uid://defpd2rxvv7dp" path="res://Enemies/slime_sentry.tscn" id="5_cbaiu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vxobl"]
 texture = ExtResource("2_n3fxd")
@@ -47,3 +48,6 @@ position = Vector2(1086, 52)
 
 [node name="Slime4" parent="." instance=ExtResource("3_2hbak")]
 position = Vector2(76, 54)
+
+[node name="SlimeSentry" parent="." instance=ExtResource("5_cbaiu")]
+position = Vector2(637, 501)

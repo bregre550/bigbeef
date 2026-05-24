@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dqf7lanaasfjk" path="res://Scripts/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://di3l3o0im8ift" path="res://Assets/player_bun_dodge_down.png" id="2_p5o4e"]
-[ext_resource type="Script" uid="uid://bfdxm8sj18gsw" path="res://Scripts/abilities.gd" id="3_btcbx"]
-[ext_resource type="PackedScene" uid="uid://cb0gybucnk3g" path="res://Player/bullet.tscn" id="4_gwnis"]
 [ext_resource type="Script" uid="uid://cgfn13jtey36j" path="res://Scripts/player_state_machine.gd" id="5_k53q1"]
 [ext_resource type="Script" uid="uid://vao538sccexb" path="res://Scripts/state_idle.gd" id="6_vtle1"]
 [ext_resource type="Script" uid="uid://ciempr5a88cat" path="res://Scripts/state_walk.gd" id="7_od3ui"]
@@ -11,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://drlerav7dnh1w" path="res://GeneralNodes/hit_box.tscn" id="9_00tjw"]
 [ext_resource type="Script" uid="uid://c8bjdno8p15qj" path="res://Scripts/state_attack.gd" id="9_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://i2lqog03kv4t" path="res://Assets/player_bun_sword.png" id="10_p5o4e"]
+[ext_resource type="Script" uid="uid://dpcn1enq23hj6" path="res://Scripts/state_shoot.gd" id="11_5htga"]
 [ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="11_gu6f8"]
+[ext_resource type="PackedScene" uid="uid://dg0g4a76pbbhc" path="res://Player/sword_beam.tscn" id="12_gu6f8"]
 [ext_resource type="Script" uid="uid://ba83dyam251ry" path="res://Scripts/state_dodge.gd" id="12_p5o4e"]
 
 [sub_resource type="Animation" id="Animation_6pogt"]
@@ -987,7 +987,7 @@ radius = 1.4142137
 height = 12.727923
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btcbx"]
-radius = 3.0
+radius = 2.0
 height = 8.0
 
 [sub_resource type="Animation" id="Animation_fhl08"]
@@ -1724,7 +1724,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5htga"]
-radius = 3.0
+radius = 2.0
 height = 8.0
 
 [sub_resource type="Animation" id="Animation_gpjlu"]
@@ -1817,7 +1817,7 @@ shape = SubResource("CapsuleShape2D_p5o4e")
 debug_color = Color(1, 0, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 0.5)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_btcbx")
 debug_color = Color(0, 0.6, 0.69803923, 0)
@@ -1829,10 +1829,6 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
-
-[node name="Abilities" type="Node2D" parent="."]
-script = ExtResource("3_btcbx")
-bullet = ExtResource("4_gwnis")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_k53q1")
@@ -1854,10 +1850,15 @@ script = ExtResource("9_p5o4e")
 [node name="Dodge" type="Node" parent="StateMachine"]
 script = ExtResource("12_p5o4e")
 
+[node name="Shoot" type="Node" parent="StateMachine"]
+script = ExtResource("11_5htga")
+decelerate_speed = null
+sword_beam = ExtResource("12_gu6f8")
+
 [node name="HitBox" parent="." instance=ExtResource("9_00tjw")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, 1)
+position = Vector2(0, 0.5)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_5htga")
 debug_color = Color(0.6039216, 0.3647059, 1, 0)
