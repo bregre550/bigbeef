@@ -44,6 +44,7 @@ func Enter() -> void:
 	b.animate()
 	
 	shooting = true
+	player.modulate_attack_sprite(Color(1, 1, 1))
 	
 func Exit() -> void:
 	animation.animation_finished.disconnect(_end_shot)

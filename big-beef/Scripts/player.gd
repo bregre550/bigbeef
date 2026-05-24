@@ -43,6 +43,7 @@ var direction: Vector2 = Vector2.ZERO
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: Node = $StateMachine
 @onready var hit_box: HitBox = $HitBox
+@onready var attack_sprite: Sprite2D = $Sprite2D/AttackSprite
 
 signal direction_changed(new_direction: Vector2)
 signal player_damaged(hurt_box: HurtBox)
@@ -162,4 +163,10 @@ func make_invulnerable(_duration: float = 1.0) -> void:
 func _on_bullet_deflect() -> void:
 	if bullets_deflected < deflects_needed:
 		bullets_deflected += 1
+		
+	if bullets_deflected >= deflects_needed:
+		modulate_attack_sprite(Color(1.0, 1.0, 0.0, 1.0))
+		
+func modulate_attack_sprite(color: Color) -> void:
+	attack_sprite.modulate = color
 	
