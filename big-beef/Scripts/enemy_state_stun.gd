@@ -10,6 +10,7 @@ class_name EnemyStateStun extends EnemyState
 
 @export_category("AI")
 @export var next_state : EnemyState
+@export var is_sentry: bool = false
 
 var _damage_position : Vector2
 var _direction : Vector2
@@ -25,7 +26,8 @@ func enter() -> void:
 	_direction = enemy.global_position.direction_to(_damage_position)
 	
 	enemy.set_direction(_direction)
-	enemy.velocity = _direction * -knockback_speed
+	if not is_sentry:
+		enemy.velocity = _direction * -knockback_speed
 	
 	_animation_finished = false
 	enemy.update_animation(anim_name)

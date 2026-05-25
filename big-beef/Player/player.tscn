@@ -987,7 +987,7 @@ radius = 1.4142137
 height = 12.727923
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btcbx"]
-radius = 2.0
+radius = 3.5
 height = 8.0
 
 [sub_resource type="Animation" id="Animation_fhl08"]
@@ -1724,7 +1724,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5htga"]
-radius = 2.0
+radius = 3.5
 height = 8.0
 
 [sub_resource type="Animation" id="Animation_gpjlu"]
@@ -1817,7 +1817,7 @@ shape = SubResource("CapsuleShape2D_p5o4e")
 debug_color = Color(1, 0, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, -1)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_btcbx")
 debug_color = Color(0, 0.6, 0.69803923, 0)
@@ -1852,13 +1852,13 @@ script = ExtResource("12_p5o4e")
 
 [node name="Shoot" type="Node" parent="StateMachine"]
 script = ExtResource("11_5htga")
-decelerate_speed = null
 sword_beam = ExtResource("12_gu6f8")
 
 [node name="HitBox" parent="." instance=ExtResource("9_00tjw")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, 0.5)
+y_sort_enabled = true
+position = Vector2(0, -1)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_5htga")
 debug_color = Color(0.6039216, 0.3647059, 1, 0)

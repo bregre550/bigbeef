@@ -1,6 +1,7 @@
 class_name EnemyStateDestroy extends EnemyState
 
 @onready var effect_animation_player: AnimationPlayer = $"../../EffectAnimationPlayer"
+@onready var hurt_box: HurtBox = $"../../HurtBox"
 
 @export var anim_name: String = "stun"
 
@@ -12,6 +13,7 @@ func init() -> void:
 ## What happens when the enemy enters this State?
 func enter() -> void:
 	enemy.velocity = Vector2.ZERO
+	hurt_box.monitoring = false
 	_animation_finished = false
 	enemy.update_animation(anim_name)
 	

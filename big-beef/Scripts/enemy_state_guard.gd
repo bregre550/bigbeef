@@ -6,12 +6,9 @@ class_name EnemyStateGuard extends EnemyState
 @onready var vision_area: VisionArea = $"../../VisionArea"
 
 @export_category("AI")
-@export var state_duration_min : float = 0.5
-@export var state_duration_max : float = 1.5
-@export var after_idle_state : EnemyState
+@export var shoot_delay: float = 0.5
 
 var can_see_player: bool = false
-var shoot_delay: float = 2.0
 var is_aggro: bool = false
 var aggro_duration: float = 5.0
 

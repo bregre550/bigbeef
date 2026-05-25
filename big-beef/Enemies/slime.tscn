@@ -387,6 +387,7 @@ _data = {
 }
 
 [node name="Slime" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 256
 collision_mask = 16
 motion_mode = 1
@@ -433,8 +434,9 @@ script = ExtResource("2_87lq7")
 script = ExtResource("3_ora3b")
 after_idle_state = NodePath("../Wander")
 
-[node name="Wander" type="Node" parent="EnemyStateMachine"]
+[node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("4_0tjn4")
+next_state = NodePath("../Idle")
 
 [node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("11_aq8il")

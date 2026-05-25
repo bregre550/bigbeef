@@ -385,6 +385,7 @@ _data = {
 }
 
 [node name="SlimeSentry" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 256
 collision_mask = 16
 motion_mode = 1
@@ -430,14 +431,17 @@ script = ExtResource("5_dubru")
 
 [node name="Guard" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("6_v3euf")
+shoot_delay = 0.75
 
 [node name="Turret" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("6_vpmqt")
 slime_ball = ExtResource("8_wrhy4")
+aim_spread = 2.0
 
 [node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("9_t2cxy")
 next_state = NodePath("../Guard")
+is_sentry = true
 
 [node name="Destroy" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_0vf2u")
