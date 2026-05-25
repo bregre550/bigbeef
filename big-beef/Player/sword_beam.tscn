@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="3_fhau7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d7yj7"]
-radius = 2.0
+radius = 5.0990195
 
 [sub_resource type="Animation" id="Animation_67mrh"]
 length = 0.001

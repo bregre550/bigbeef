@@ -9,7 +9,6 @@ var attacking: bool = false
 
 @onready var animation: AnimationPlayer = $"../../AnimationPlayer"
 @onready var guard: EnemyStateGuard = $"../Guard"
-
 func init() -> void:
 	pass
 	

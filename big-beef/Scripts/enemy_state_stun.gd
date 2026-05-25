@@ -1,5 +1,7 @@
 class_name EnemyStateStun extends EnemyState
 
+@onready var effect_animation_player: AnimationPlayer = $"../../EffectAnimationPlayer"
+
 @export var anim_name : String = "stun"
 @export var knockback_speed : float = 300.0
 @export var decelerate_speed : float = 5.0
@@ -9,20 +11,15 @@ class_name EnemyStateStun extends EnemyState
 @export_category("AI")
 @export var next_state : EnemyState
 
-@onready var attack: EnemyStateAttack = $"../Attack"
-@onready var chase: EnemyStateChase = $"../Chase"
-
 var _damage_position : Vector2
 var _direction : Vector2
 var _animation_finished : bool = false
 
 func init() -> void:
 	enemy.enemy_damaged.connect(_on_enemy_damaged)
-	pass
 	
 ## What happens when the enemy enters this State?
 func enter() -> void:
-	attack.chase_time = chase.shoot_delay
 	enemy.make_invulnerable(invulnerable_duration)
 		
 	_direction = enemy.global_position.direction_to(_damage_position)
@@ -33,10 +30,13 @@ func enter() -> void:
 	_animation_finished = false
 	enemy.update_animation(anim_name)
 	enemy.animation_player.animation_finished.connect(_on_animation_finished)
+	
+	effect_animation_player.play("damaged")
 
 ## What happens when the enemy exits this State?
 func exit() -> void:
 	enemy.animation_player.animation_finished.disconnect(_on_animation_finished)
+	enemy.velocity = Vector2.ZERO
 	
 ## What happens during the _proces updates in this State?
 func process(_delta : float) -> EnemyState:

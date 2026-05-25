@@ -63,7 +63,6 @@ func _take_damage(hurt_box : HurtBox) -> void:
 		enemy_damaged.emit(hurt_box)
 	else:
 		enemy_destroyed.emit(hurt_box)
-		queue_free()
 	
 func make_invulnerable(_duration: float = 1.0) -> void:
 	invulnerable = true

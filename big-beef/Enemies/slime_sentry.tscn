@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://defpd2rxvv7dp"]
+[gd_scene load_steps=37 format=3 uid="uid://defpd2rxvv7dp"]
 
 [ext_resource type="Script" uid="uid://bhfhtb18a6f8v" path="res://Scripts/enemy.gd" id="1_ys8fe"]
 [ext_resource type="PackedScene" uid="uid://drlerav7dnh1w" path="res://GeneralNodes/hit_box.tscn" id="2_qaydu"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://c7bsdym44uiim" path="res://Scripts/enemy_state_guard.gd" id="6_v3euf"]
 [ext_resource type="Script" uid="uid://bwl2urkmkdgv8" path="res://Scripts/enemy_state_turret.gd" id="6_vpmqt"]
 [ext_resource type="PackedScene" uid="uid://clf35hvgl62tj" path="res://Enemies/slime_ball.tscn" id="8_wrhy4"]
+[ext_resource type="Script" uid="uid://df8bxa4rsqu3f" path="res://Scripts/enemy_state_stun.gd" id="9_t2cxy"]
+[ext_resource type="Script" uid="uid://cwut871noiffk" path="res://Scripts/enemy_state_destroy.gd" id="10_0vf2u"]
 [ext_resource type="PackedScene" uid="uid://dyd6qtv3bepbp" path="res://Enemies/vision_area.tscn" id="12_gnk4f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87lq7"]
@@ -314,6 +316,74 @@ _data = {
 &"walk_up": SubResource("Animation_0tjn4")
 }
 
+[sub_resource type="Animation" id="Animation_dlrgf"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.18431373, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wgfhp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.18431373, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u0ypx"]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.50000006, 0.6, 0.70000005, 0.8000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t2cxy"]
+resource_name = "destroy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.50000006, 0.6, 0.70000005, 0.8000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vplon"]
+_data = {
+&"RESET": SubResource("Animation_wgfhp"),
+&"damaged": SubResource("Animation_u0ypx"),
+&"default": SubResource("Animation_dlrgf"),
+&"destroy": SubResource("Animation_t2cxy")
+}
+
 [node name="SlimeSentry" type="CharacterBody2D"]
 collision_layer = 256
 collision_mask = 16
@@ -365,9 +435,22 @@ script = ExtResource("6_v3euf")
 script = ExtResource("6_vpmqt")
 slime_ball = ExtResource("8_wrhy4")
 
+[node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("9_t2cxy")
+next_state = NodePath("../Guard")
+
+[node name="Destroy" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("10_0vf2u")
+
 [node name="VisionArea" parent="." instance=ExtResource("12_gnk4f")]
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea"]
 polygon = PackedVector2Array(-16, 0, 16, 0, 80, 120, -80, 120)
+
+[node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vplon")
+}
+autoplay = "default"
