@@ -1,18 +1,16 @@
-[gd_scene load_steps=39 format=3 uid="uid://ci4cji8qbj2u"]
+[gd_scene load_steps=37 format=3 uid="uid://defpd2rxvv7dp"]
 
-[ext_resource type="Texture2D" uid="uid://c4o1tww2ah8fu" path="res://Assets/enemy_slime.png" id="1_00swj"]
-[ext_resource type="Script" uid="uid://bhfhtb18a6f8v" path="res://Scripts/enemy.gd" id="1_87lq7"]
-[ext_resource type="Script" uid="uid://scc1vrorujad" path="res://Scripts/enemy_state_machine.gd" id="2_87lq7"]
-[ext_resource type="PackedScene" uid="uid://drlerav7dnh1w" path="res://GeneralNodes/hit_box.tscn" id="2_kqei6"]
-[ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="2_v0fv8"]
-[ext_resource type="Script" uid="uid://b25vbk6ekacbg" path="res://Scripts/enemy_state_idle.gd" id="3_ora3b"]
-[ext_resource type="Script" uid="uid://cbdasn321msi" path="res://Scripts/enemy_state_wander.gd" id="4_0tjn4"]
-[ext_resource type="Script" uid="uid://bhrylx37ub6fe" path="res://Scripts/enemy_state_chase.gd" id="6_0tjn4"]
-[ext_resource type="PackedScene" uid="uid://dyd6qtv3bepbp" path="res://Enemies/vision_area.tscn" id="6_ora3b"]
-[ext_resource type="PackedScene" uid="uid://clf35hvgl62tj" path="res://Enemies/slime_ball.tscn" id="8_amke3"]
-[ext_resource type="Script" uid="uid://64hnmpwub2v3" path="res://Scripts/enemy_state_attack.gd" id="10_kqei6"]
-[ext_resource type="Script" uid="uid://df8bxa4rsqu3f" path="res://Scripts/enemy_state_stun.gd" id="11_aq8il"]
-[ext_resource type="Script" uid="uid://cwut871noiffk" path="res://Scripts/enemy_state_destroy.gd" id="12_aq8il"]
+[ext_resource type="Script" uid="uid://bhfhtb18a6f8v" path="res://Scripts/enemy.gd" id="1_ys8fe"]
+[ext_resource type="PackedScene" uid="uid://drlerav7dnh1w" path="res://GeneralNodes/hit_box.tscn" id="2_qaydu"]
+[ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="3_crr1a"]
+[ext_resource type="Texture2D" uid="uid://c4o1tww2ah8fu" path="res://Assets/enemy_slime.png" id="4_om1cq"]
+[ext_resource type="Script" uid="uid://scc1vrorujad" path="res://Scripts/enemy_state_machine.gd" id="5_dubru"]
+[ext_resource type="Script" uid="uid://c7bsdym44uiim" path="res://Scripts/enemy_state_guard.gd" id="6_v3euf"]
+[ext_resource type="Script" uid="uid://bwl2urkmkdgv8" path="res://Scripts/enemy_state_turret.gd" id="6_vpmqt"]
+[ext_resource type="PackedScene" uid="uid://clf35hvgl62tj" path="res://Enemies/slime_ball.tscn" id="8_wrhy4"]
+[ext_resource type="Script" uid="uid://df8bxa4rsqu3f" path="res://Scripts/enemy_state_stun.gd" id="9_t2cxy"]
+[ext_resource type="Script" uid="uid://cwut871noiffk" path="res://Scripts/enemy_state_destroy.gd" id="10_0vf2u"]
+[ext_resource type="PackedScene" uid="uid://dyd6qtv3bepbp" path="res://Enemies/vision_area.tscn" id="12_gnk4f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87lq7"]
 radius = 6.0
@@ -318,7 +316,7 @@ _data = {
 &"walk_up": SubResource("Animation_0tjn4")
 }
 
-[sub_resource type="Animation" id="Animation_ucd5e"]
+[sub_resource type="Animation" id="Animation_dlrgf"]
 resource_name = "default"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -330,10 +328,10 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 0.18431373, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_1fluc"]
+[sub_resource type="Animation" id="Animation_wgfhp"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -345,10 +343,10 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 0.18431373, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_jnefe"]
+[sub_resource type="Animation" id="Animation_u0ypx"]
 resource_name = "damaged"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -363,7 +361,7 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1), Color(1, 1, 1, 0.09803922), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_0y5vi"]
+[sub_resource type="Animation" id="Animation_t2cxy"]
 resource_name = "destroy"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -378,22 +376,22 @@ tracks/0/keys = {
 "values": [Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1), Color(1, 1, 1, 0.09803922), Color(1, 0, 0, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0y5vi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vplon"]
 _data = {
-&"RESET": SubResource("Animation_1fluc"),
-&"damaged": SubResource("Animation_jnefe"),
-&"default": SubResource("Animation_ucd5e"),
-&"destroy": SubResource("Animation_0y5vi")
+&"RESET": SubResource("Animation_wgfhp"),
+&"damaged": SubResource("Animation_u0ypx"),
+&"default": SubResource("Animation_dlrgf"),
+&"destroy": SubResource("Animation_t2cxy")
 }
 
-[node name="Slime" type="CharacterBody2D"]
+[node name="SlimeSentry" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 256
 collision_mask = 16
 motion_mode = 1
-script = ExtResource("1_87lq7")
+script = ExtResource("1_ys8fe")
 
-[node name="HitBox" parent="." instance=ExtResource("2_kqei6")]
+[node name="HitBox" parent="." instance=ExtResource("2_qaydu")]
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
@@ -402,7 +400,7 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_87lq7")
 debug_color = Color(0, 0.6337686, 0.42590782, 0)
 
-[node name="HurtBox" parent="." instance=ExtResource("2_v0fv8")]
+[node name="HurtBox" parent="." instance=ExtResource("3_crr1a")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 1)
@@ -411,7 +409,8 @@ shape = SubResource("CapsuleShape2D_kqei6")
 debug_color = Color(1, 0, 0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_00swj")
+modulate = Color(1, 1, 0.18431373, 1)
+texture = ExtResource("4_om1cq")
 offset = Vector2(0, -4)
 hframes = 3
 vframes = 6
@@ -428,36 +427,26 @@ libraries = {
 }
 
 [node name="EnemyStateMachine" type="Node" parent="."]
-script = ExtResource("2_87lq7")
+script = ExtResource("5_dubru")
 
-[node name="Idle" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("after_idle_state")]
-script = ExtResource("3_ora3b")
-after_idle_state = NodePath("../Wander")
+[node name="Guard" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("6_v3euf")
+shoot_delay = 0.75
 
-[node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
-script = ExtResource("4_0tjn4")
-next_state = NodePath("../Idle")
+[node name="Turret" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("6_vpmqt")
+slime_ball = ExtResource("8_wrhy4")
+aim_spread = 2.0
 
 [node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
-script = ExtResource("11_aq8il")
-next_state = NodePath("../Chase")
-
-[node name="Chase" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("vision_area", "next_state")]
-script = ExtResource("6_0tjn4")
-chase_speed = 55.0
-vision_area = NodePath("../../VisionArea")
-state_aggro_duration = 2.0
-shoot_delay = 1.5
-next_state = NodePath("../Idle")
-
-[node name="Attack" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("10_kqei6")
-slime_ball = ExtResource("8_amke3")
+script = ExtResource("9_t2cxy")
+next_state = NodePath("../Guard")
+is_sentry = true
 
 [node name="Destroy" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("12_aq8il")
+script = ExtResource("10_0vf2u")
 
-[node name="VisionArea" parent="." instance=ExtResource("6_ora3b")]
+[node name="VisionArea" parent="." instance=ExtResource("12_gnk4f")]
 collision_layer = 0
 monitorable = false
 
@@ -466,6 +455,6 @@ polygon = PackedVector2Array(-16, 0, 16, 0, 80, 120, -80, 120)
 
 [node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_0y5vi")
+&"": SubResource("AnimationLibrary_vplon")
 }
-autoplay = "RESET"
+autoplay = "default"

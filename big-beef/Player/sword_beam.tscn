@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg0g4a76pbbhc"]
+
+[ext_resource type="Script" uid="uid://4mhxb1rlof4j" path="res://Scripts/bullet.gd" id="1_g2ic1"]
+[ext_resource type="Texture2D" uid="uid://1abur3j3nwd3" path="res://Assets/sword_beam.png" id="2_g2ic1"]
+[ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="3_fhau7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7yj7"]
+radius = 5.0990195
+
+[sub_resource type="Animation" id="Animation_67mrh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_g2ic1"]
+resource_name = "shoot"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_fhau7"]
+resource_name = "fly"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhau7"]
+_data = {
+&"RESET": SubResource("Animation_67mrh"),
+&"fly": SubResource("Animation_fhau7"),
+&"shoot": SubResource("Animation_g2ic1")
+}
+
+[node name="SwordBeam" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_g2ic1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_g2ic1")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d7yj7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fhau7")
+}
+
+[node name="HurtBox" parent="." instance=ExtResource("3_fhau7")]
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_d7yj7")

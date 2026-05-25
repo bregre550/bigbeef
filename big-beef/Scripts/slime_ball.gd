@@ -27,6 +27,7 @@ func _on_area_entered(_b: Area2D) -> void:
 	queue_free()
 	
 func deflect(_b: Area2D) -> void:
+	SignalBus.deflect_bullet()
 	velocity *= -1
 	lifetime = 3.0
 	hurt_box.set_collision_mask_value(2, false)

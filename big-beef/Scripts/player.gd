@@ -36,13 +36,14 @@ const OPP_DIR = {
 	"attack_up": Vector2.DOWN,
 	"attack_up_right": Vector2(-1, 1),
 }
-var direction : Vector2 = Vector2.ZERO
+var direction: Vector2 = Vector2.ZERO
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var effect_animation_player: AnimationPlayer = $EffectAnimationPlayer
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: Node = $StateMachine
 @onready var hit_box: HitBox = $HitBox
+@onready var attack_sprite: Sprite2D = $AttackSprite
 
 signal direction_changed(new_direction: Vector2)
 signal player_damaged(hurt_box: HurtBox)
@@ -54,17 +55,21 @@ var invulernable: bool = false
 var hp: int = 100
 var max_hp: int = 100
 
+var bullets_deflected: int = 0
+var deflects_needed: int = 3
+
 func _ready() -> void:
 	PlayerManager.player = self
 	state_machine.Initialize(self)
 	hit_box.damaged.connect(_take_damage)
+	SignalBus.bullet_deflected.connect(_on_bullet_deflect)
 
 func _input( event: InputEvent ):
 	if animation.current_animation.contains("attack") or animation.current_animation.contains("dodge"):
 		if event.is_action("flip strafe") or event.is_action("strafe"):
 			if event.is_released():
 				is_strafing = false
-		return
+			return
 		
 	if event.is_action("strafe"):
 		if event.is_pressed():
@@ -102,18 +107,20 @@ func _physics_process( _delta: float ) -> void:
 func set_direction() -> bool:
 	if is_strafing:
 		return false
-	
+		
 	var direction_id: int = int(round((direction).angle() / TAU * DIR_8.size()))
 	var new_direction = DIR_8[direction_id]
 	if new_direction == cardinal_direction:
 		return false
 		
 	cardinal_direction = new_direction
+	
 	direction_changed.emit(new_direction)
 	return true
 	
 func update_animation(state: String) -> void:
 	animation.play(state + "_" + anim_direction())
+	update_sword_layer()
 	
 func anim_direction() -> String:
 	if cardinal_direction == Vector2.DOWN:
@@ -154,3 +161,19 @@ func make_invulnerable(_duration: float = 1.0) -> void:
 	
 	invulernable = false
 	hit_box.monitoring = true
+	
+func _on_bullet_deflect() -> void:
+	if bullets_deflected < deflects_needed:
+		bullets_deflected += 1
+		
+	if bullets_deflected >= deflects_needed:
+		modulate_attack_sprite(Color(1.0, 1.0, 0.0, 1.0))
+		
+func modulate_attack_sprite(color: Color) -> void:
+	attack_sprite.modulate = color
+	
+func update_sword_layer() -> void:
+	if cardinal_direction == Vector2.UP or cardinal_direction == Vector2(-1, -1) or cardinal_direction == Vector2(1, -1):
+		move_child(attack_sprite, 0)
+	else:
+		move_child(attack_sprite, 1)

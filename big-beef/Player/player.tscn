@@ -1,9 +1,7 @@
 [gd_scene load_steps=73 format=3 uid="uid://bepupgc7tk38k"]
 
 [ext_resource type="Script" uid="uid://dqf7lanaasfjk" path="res://Scripts/player.gd" id="1_l8h54"]
-[ext_resource type="Texture2D" uid="uid://di3l3o0im8ift" path="res://Assets/player_bun_dodge_down.png" id="2_p5o4e"]
-[ext_resource type="Script" uid="uid://bfdxm8sj18gsw" path="res://Scripts/abilities.gd" id="3_btcbx"]
-[ext_resource type="PackedScene" uid="uid://cb0gybucnk3g" path="res://Player/bullet.tscn" id="4_gwnis"]
+[ext_resource type="Texture2D" uid="uid://bn5o3knkj0ylu" path="res://Assets/player_bun_animations.png" id="4_p5o4e"]
 [ext_resource type="Script" uid="uid://cgfn13jtey36j" path="res://Scripts/player_state_machine.gd" id="5_k53q1"]
 [ext_resource type="Script" uid="uid://vao538sccexb" path="res://Scripts/state_idle.gd" id="6_vtle1"]
 [ext_resource type="Script" uid="uid://ciempr5a88cat" path="res://Scripts/state_walk.gd" id="7_od3ui"]
@@ -11,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://drlerav7dnh1w" path="res://GeneralNodes/hit_box.tscn" id="9_00tjw"]
 [ext_resource type="Script" uid="uid://c8bjdno8p15qj" path="res://Scripts/state_attack.gd" id="9_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://i2lqog03kv4t" path="res://Assets/player_bun_sword.png" id="10_p5o4e"]
+[ext_resource type="Script" uid="uid://dpcn1enq23hj6" path="res://Scripts/state_shoot.gd" id="11_5htga"]
 [ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="11_gu6f8"]
+[ext_resource type="PackedScene" uid="uid://dg0g4a76pbbhc" path="res://Player/sword_beam.tscn" id="12_gu6f8"]
 [ext_resource type="Script" uid="uid://ba83dyam251ry" path="res://Scripts/state_dodge.gd" id="12_p5o4e"]
 
 [sub_resource type="Animation" id="Animation_6pogt"]
@@ -19,7 +19,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,7 +31,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -43,7 +43,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -55,7 +55,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -67,58 +67,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D/AttackSprite:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D:z_index")
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [0.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -132,7 +108,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -144,19 +120,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-1, 4.5), Vector2(0, 4), Vector2(-0.5, 5), Vector2(-1, 4), Vector2(-1, 5.5)]
+"values": [Vector2(0, 0), Vector2(2, -7), Vector2(2, -9), Vector2(1.5, -8), Vector2(1, -9), Vector2(1, -7.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -168,7 +144,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -180,46 +156,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [Vector2(0, 0), Vector2(1, 3), Vector2(3, 9), Vector2(9.5, 13), Vector2(14, 8), Vector2(19, -2)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(1, 3), Vector2(3, 9), Vector2(9.5, 13), Vector2(14, 8), Vector2(19, -2)]
+"values": [0.0, 1.2217304763960306, 0.7853982, 0.0, -0.7853981633974483, -1.5707963267948966]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0.0, 1.2217304763960306, 0.7853982, 0.0, -0.7853981633974483, -1.5707963267948966]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.4499948),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -233,7 +197,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -245,19 +209,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-1, 4), Vector2(-1, 4.5), Vector2(0, 5), Vector2(-0.5, 5), Vector2(-1.5, 2)]
+"values": [Vector2(0, 0), Vector2(1, -9), Vector2(1, -8.5), Vector2(2, -8), Vector2(1.5, -8), Vector2(0, -11)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -269,7 +233,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -281,58 +245,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D/AttackSprite:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D:z_index")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 0), Vector2(0, -2), Vector2(-3, 2), Vector2(-3, 8), Vector2(7, 10), Vector2(16, 7)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0.0, -1.2217304763960306, -1.5707963267948966, -2.356194490192345, -3.141592653589793, -3.91826417072727]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.45000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -346,7 +286,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -358,19 +298,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-2, 4), Vector2(-4, 4.5), Vector2(-4, 5), Vector2(-3.5, 4), Vector2(-2, 2)]
+"values": [Vector2(0, 0), Vector2(0, -9), Vector2(-1, -8.5), Vector2(-2, -8), Vector2(-1.5, -9), Vector2(0, -11)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -382,7 +322,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -394,58 +334,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D/AttackSprite:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D:z_index")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 0), Vector2(14, -2), Vector2(17, 2), Vector2(17, 8), Vector2(7.5, 10), Vector2(-3, 8)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0.0, 1.0471975511965976, 1.5707963267948966, 2.356194490192345, 3.141592653589793, 3.9269908169872414]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.45000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -459,7 +375,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -471,19 +387,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-4, 5), Vector2(-4, 6), Vector2(-5, 5.5), Vector2(-4, 4), Vector2(-3.5, 5)]
+"values": [Vector2(0, 0), Vector2(-2, -8), Vector2(-3, -8), Vector2(-3, -7.5), Vector2(-2, -8), Vector2(-1.5, -8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -495,7 +411,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -507,46 +423,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [Vector2(0, 0), Vector2(-1, -6), Vector2(-3, -6), Vector2(-9, -1), Vector2(-3, 3), Vector2(8.5, 9)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-1, -6), Vector2(-3, -6), Vector2(-9, -1), Vector2(-3, 3), Vector2(8.5, 9)]
+"values": [0.0, -0.6981317007977318, -0.7853981633974483, -1.5707963267948966, -2.0158552860534504, -3.141592653589793]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0.0, -0.6981317007977318, -0.7853981633974483, -1.5707963267948966, -2.0158552860534504, -3.141592653589793]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.45000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -560,7 +464,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -572,19 +476,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-1, 5), Vector2(0, 6), Vector2(-2, 5.5), Vector2(-1, 4), Vector2(0, 4)]
+"values": [Vector2(0, 0), Vector2(1, -8), Vector2(2, -8), Vector2(0, -7.5), Vector2(1, -8), Vector2(2, -9)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -596,7 +500,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -608,46 +512,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [Vector2(0, 0), Vector2(15, -5), Vector2(17, -6), Vector2(21, -1), Vector2(17, 3), Vector2(5.5, 8)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(15, -5), Vector2(17, -6), Vector2(21, -1), Vector2(17, 3), Vector2(5.5, 8)]
+"values": [0.0, 0.7853981633974483, 0.7853981633974483, 1.5707963267948966, 2.0943951023931953, 3.141592653589793]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0.0, 0.7853981633974483, 0.7853981633974483, 1.5707963267948966, 2.0943951023931953, 3.141592653589793]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.45000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -661,7 +553,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -673,19 +565,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-5, 11), Vector2(-3, 11), Vector2(-2, 9), Vector2(1, 6), Vector2(0, 5.5)]
+"values": [Vector2(0, 0), Vector2(-4, -6), Vector2(-1, -4), Vector2(0, -4), Vector2(2, -7), Vector2(2, -7.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -697,7 +589,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -709,58 +601,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D/AttackSprite:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.3846154, 0.45000002),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, -1, -1, 0, 0]
+"values": [Vector2(0, 0), Vector2(13, -11), Vector2(10, -17), Vector2(4.5, -20), Vector2(-5, -11.5), Vector2(-8, -2)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D:z_index")
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [-1]
+"values": [0.0, 1.0995574287564276, 0.8028514559173916, 0.0, -0.8726646259971648, -1.5707963267948966]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, 0), Vector2(13, -11), Vector2(9, -18), Vector2(4.5, -20), Vector2(-5, -11.5), Vector2(-8, -2)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0.0, 1.0995574287564276, 0.8901179185171081, 0.0, -0.8726646259971648, -1.5707963267948966]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.45000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -774,7 +642,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -786,19 +654,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(2, 7), Vector2(0, 5), Vector2(3, 5), Vector2(-1, 5.5), Vector2(1, 7)]
+"values": [Vector2(0, 0), Vector2(2, -4), Vector2(2, -8), Vector2(4, -8), Vector2(1, -7.5), Vector2(3, -5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -810,7 +678,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -822,46 +690,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D/AttackSprite:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.23076923),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [-1, 0]
+"values": [Vector2(0, 0), Vector2(8, -6), Vector2(-1.5, -15), Vector2(-8, -11), Vector2(-9, -2), Vector2(-8, 3)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(8, -6), Vector2(-1.5, -15), Vector2(-8, -11), Vector2(-9, -2), Vector2(-8, 3)]
+"values": [0.0, 1.9198621771937625, 0.01745329251994329, -0.7504915783575618, -1.5707963267948966, -2.356194490192345]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0.0, 1.9198621771937625, 0.01745329251994329, -0.7504915783575618, -1.5707963267948966, -2.356194490192345]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.45000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -875,7 +731,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D/AttackSprite:frame")
+tracks/0/path = NodePath("../../AttackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -887,19 +743,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../Sprite2D/AttackSprite:position")
+tracks/1/path = NodePath("../../AttackSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(-6, 9), Vector2(-4, 5), Vector2(-6, 5), Vector2(-3, 5.5), Vector2(-5, 7)]
+"values": [Vector2(0, 0), Vector2(-2, -4), Vector2(-2, -8), Vector2(-4, -8), Vector2(-1, -7.5), Vector2(-3, -5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitoring")
+tracks/2/path = NodePath("../../AttackSprite/HurtBox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -911,7 +767,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../Sprite2D/AttackSprite:visible")
+tracks/3/path = NodePath("../../AttackSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -923,46 +779,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../Sprite2D/AttackSprite:z_index")
+tracks/4/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3846154),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [-1, 0]
+"values": [Vector2(0, 0), Vector2(6, -6), Vector2(15.5, -15), Vector2(22, -11), Vector2(24, -2), Vector2(22, 3)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:position")
+tracks/5/path = NodePath("../../AttackSprite/HurtBox/CollisionShape2D:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(6, -6), Vector2(15.5, -15), Vector2(22, -11), Vector2(24, -2), Vector2(22, 3)]
+"values": [0.0, 1.038470904936626, 3.097959422289935, 3.970624048287099, -4.71238898038469, -3.9269908169872414]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../../Sprite2D/AttackSprite/HurtBox/CollisionShape2D:rotation")
+tracks/6/path = NodePath("../../AttackSprite/HurtBox:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.07692308, 0.15384616, 0.23076923, 0.30769232, 0.3846154),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0.0, 1.038470904936626, 3.097959422289935, 3.970624048287099, -4.71238898038469, -3.9269908169872414]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../../Sprite2D/AttackSprite/HurtBox:monitorable")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.07692308, 0.3846154, 0.45000002),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -987,7 +831,7 @@ radius = 1.4142137
 height = 12.727923
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btcbx"]
-radius = 3.0
+radius = 3.5
 height = 8.0
 
 [sub_resource type="Animation" id="Animation_fhl08"]
@@ -1160,8 +1004,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_gvnt1"]
 resource_name = "dodge_down_left"
-length = 0.3
-step = 0.2
+length = 0.54
+step = 0.06
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1169,16 +1013,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05882353, 0.11764706, 0.1764706, 0.23529412, 0.29411766, 0.3529412, 0.4117647, 0.47058824),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [32]
+"values": [180, 181, 182, 183, 184, 185, 186, 187, 188]
 }
 
 [sub_resource type="Animation" id="Animation_1kmt7"]
 resource_name = "dodge_down_right"
-length = 0.3
-step = 0.2
+length = 0.54
+step = 0.06
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1186,15 +1030,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05882353, 0.11764706, 0.1764706, 0.23529412, 0.29411766, 0.3529412, 0.4117647, 0.47058824),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [40]
+"values": [189, 190, 191, 192, 193, 194, 195, 196, 197]
 }
 
 [sub_resource type="Animation" id="Animation_c4i3b"]
 resource_name = "dodge_left"
-length = 0.3
+length = 0.54
+step = 0.06
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1202,15 +1047,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05882353, 0.11764706, 0.1764706, 0.23529412, 0.29411766, 0.3529412, 0.4117647, 0.47058824),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [16]
+"values": [162, 163, 164, 165, 166, 167, 168, 169, 170]
 }
 
 [sub_resource type="Animation" id="Animation_uvbbp"]
 resource_name = "dodge_right"
-length = 0.3
+length = 0.54
+step = 0.06
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1218,15 +1064,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05882353, 0.11764706, 0.1764706, 0.23529412, 0.29411766, 0.3529412, 0.4117647, 0.47058824),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [8]
+"values": [153, 154, 155, 156, 157, 158, 159, 160, 161]
 }
 
 [sub_resource type="Animation" id="Animation_7v2uk"]
 resource_name = "dodge_up"
-length = 0.3
+length = 0.54
+step = 0.06
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1234,16 +1081,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05882353, 0.11764706, 0.1764706, 0.23529412, 0.29411766, 0.3529412, 0.4117647, 0.47058824),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [24]
+"values": [171, 172, 173, 174, 175, 176, 177, 178, 179]
 }
 
 [sub_resource type="Animation" id="Animation_m6nl3"]
 resource_name = "dodge_up_left"
-length = 0.3
-step = 0.2
+length = 0.54
+step = 0.06
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1251,16 +1098,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05882353, 0.11764706, 0.1764706, 0.23529412, 0.29411766, 0.3529412, 0.4117647, 0.47058824),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [48]
+"values": [198, 199, 200, 201, 202, 203, 204, 205, 206]
 }
 
 [sub_resource type="Animation" id="Animation_8hx1r"]
 resource_name = "dodge_up_right"
-length = 0.3
-step = 0.2
+length = 0.54
+step = 0.06
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1268,10 +1115,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05882353, 0.11764706, 0.1764706, 0.23529412, 0.29411766, 0.3529412, 0.4117647, 0.47058824),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [56]
+"values": [207, 208, 209, 210, 211, 212, 213, 214, 215]
 }
 
 [sub_resource type="Animation" id="Animation_k53q1"]
@@ -1724,7 +1571,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5htga"]
-radius = 3.0
+radius = 3.5
 height = 8.0
 
 [sub_resource type="Animation" id="Animation_gpjlu"]
@@ -1781,43 +1628,46 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_l8h54")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(2, -13)
-texture = ExtResource("2_p5o4e")
-hframes = 9
-vframes = 17
-region_rect = Rect2(0, 0, 16, 32)
-
-[node name="AttackSprite" type="Sprite2D" parent="Sprite2D"]
+[node name="AttackSprite" type="Sprite2D" parent="."]
 visible = false
+y_sort_enabled = true
 texture = ExtResource("10_p5o4e")
 hframes = 5
 vframes = 8
 
-[node name="AttackAnimationPlayer" type="AnimationPlayer" parent="Sprite2D/AttackSprite"]
-root_node = NodePath("../../../StateMachine/Attack")
+[node name="AttackAnimationPlayer" type="AnimationPlayer" parent="AttackSprite"]
+root_node = NodePath("../../StateMachine/Attack")
 libraries = {
 &"": SubResource("AnimationLibrary_ie76m")
 }
 
-[node name="HurtBox" parent="Sprite2D/AttackSprite" instance=ExtResource("11_gu6f8")]
+[node name="HurtBox" parent="AttackSprite" instance=ExtResource("11_gu6f8")]
 position = Vector2(-7, 4)
 collision_layer = 512
 collision_mask = 256
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AttackSprite/HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackSprite/HurtBox"]
 shape = SubResource("CapsuleShape2D_p5o4e")
 debug_color = Color(1, 0, 0, 0)
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("4_p5o4e")
+offset = Vector2(2, -13)
+hframes = 9
+vframes = 24
+region_rect = Rect2(0, 0, 16, 32)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, -1)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_btcbx")
 debug_color = Color(0, 0.6, 0.69803923, 0)
@@ -1829,10 +1679,6 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
-
-[node name="Abilities" type="Node2D" parent="."]
-script = ExtResource("3_btcbx")
-bullet = ExtResource("4_gwnis")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_k53q1")
@@ -1854,10 +1700,15 @@ script = ExtResource("9_p5o4e")
 [node name="Dodge" type="Node" parent="StateMachine"]
 script = ExtResource("12_p5o4e")
 
+[node name="Shoot" type="Node" parent="StateMachine"]
+script = ExtResource("11_5htga")
+sword_beam = ExtResource("12_gu6f8")
+
 [node name="HitBox" parent="." instance=ExtResource("9_00tjw")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, 1)
+y_sort_enabled = true
+position = Vector2(0, -1)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_5htga")
 debug_color = Color(0.6039216, 0.3647059, 1, 0)

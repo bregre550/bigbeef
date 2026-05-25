@@ -4,8 +4,7 @@ var attacking: bool = false
 
 @export_range(1, 20, 0.5) var decelerate_speed: float = 5.0
 
-@onready var animation: AnimationPlayer = $"../../Sprite2D/AttackSprite/AttackAnimationPlayer"
-
+@onready var animation: AnimationPlayer = $"../../AttackSprite/AttackAnimationPlayer"
 
 @onready var idle: State_Idle = $"../Idle"
 @onready var walk: State = $"../Walk"
