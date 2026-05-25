@@ -56,7 +56,7 @@ var hp: int = 100
 var max_hp: int = 100
 
 var bullets_deflected: int = 0
-var deflects_needed: int = 3
+var deflects_needed: int = 0
 
 func _ready() -> void:
 	PlayerManager.player = self
