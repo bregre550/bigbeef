@@ -410,8 +410,8 @@ debug_color = Color(1, 0, 0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0.18431373, 1)
-position = Vector2(0, -4)
 texture = ExtResource("4_om1cq")
+offset = Vector2(0, -4)
 hframes = 3
 vframes = 6
 

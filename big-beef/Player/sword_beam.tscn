@@ -65,6 +65,7 @@ _data = {
 }
 
 [node name="SwordBeam" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_g2ic1")

@@ -43,7 +43,7 @@ var direction: Vector2 = Vector2.ZERO
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: Node = $StateMachine
 @onready var hit_box: HitBox = $HitBox
-@onready var attack_sprite: Sprite2D = $Sprite2D/AttackSprite
+@onready var attack_sprite: Sprite2D = $AttackSprite
 
 signal direction_changed(new_direction: Vector2)
 signal player_damaged(hurt_box: HurtBox)
@@ -69,7 +69,7 @@ func _input( event: InputEvent ):
 		if event.is_action("flip strafe") or event.is_action("strafe"):
 			if event.is_released():
 				is_strafing = false
-		return
+			return
 		
 	if event.is_action("strafe"):
 		if event.is_pressed():
@@ -107,18 +107,20 @@ func _physics_process( _delta: float ) -> void:
 func set_direction() -> bool:
 	if is_strafing:
 		return false
-	
+		
 	var direction_id: int = int(round((direction).angle() / TAU * DIR_8.size()))
 	var new_direction = DIR_8[direction_id]
 	if new_direction == cardinal_direction:
 		return false
 		
 	cardinal_direction = new_direction
+	
 	direction_changed.emit(new_direction)
 	return true
 	
 func update_animation(state: String) -> void:
 	animation.play(state + "_" + anim_direction())
+	update_sword_layer()
 	
 func anim_direction() -> String:
 	if cardinal_direction == Vector2.DOWN:
@@ -170,3 +172,8 @@ func _on_bullet_deflect() -> void:
 func modulate_attack_sprite(color: Color) -> void:
 	attack_sprite.modulate = color
 	
+func update_sword_layer() -> void:
+	if cardinal_direction == Vector2.UP or cardinal_direction == Vector2(-1, -1) or cardinal_direction == Vector2(1, -1):
+		move_child(attack_sprite, 0)
+	else:
+		move_child(attack_sprite, 1)
