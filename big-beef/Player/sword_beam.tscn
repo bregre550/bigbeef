@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://dg0g4a76pbbhc"]
 
 [ext_resource type="Script" uid="uid://4mhxb1rlof4j" path="res://Scripts/bullet.gd" id="1_g2ic1"]
-[ext_resource type="Texture2D" uid="uid://1abur3j3nwd3" path="res://Assets/sword_beam.png" id="2_g2ic1"]
+[ext_resource type="Texture2D" uid="uid://3cb1x46lwdat" path="res://Assets/sword_beam2.png" id="2_g2ic1"]
 [ext_resource type="PackedScene" uid="uid://c1rsof0ibpd8i" path="res://GeneralNodes/hurt_box.tscn" id="3_fhau7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d7yj7"]
-radius = 5.0990195
+radius = 7.071068
 
 [sub_resource type="Animation" id="Animation_67mrh"]
 length = 0.001
@@ -72,6 +72,7 @@ script = ExtResource("1_g2ic1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_g2ic1")
+offset = Vector2(-0.5, 0)
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
