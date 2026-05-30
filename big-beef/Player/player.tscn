@@ -1689,7 +1689,6 @@ script = ExtResource("6_vtle1")
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("7_od3ui")
 strafe_speed = 50.0
-normal_speed = 90.0
 
 [node name="Stun" type="Node" parent="StateMachine"]
 script = ExtResource("8_od3ui")
