@@ -2,7 +2,7 @@ class_name State_Dodge extends State
 
 var dodging: bool = false
 
-@export var dodge_speed: float = 125.0
+@export var dodge_speed: float = 110.0
 @export var dodge_duration: float = 0.3
 
 @onready var animation: AnimationPlayer = $"../../AttackSprite/AttackAnimationPlayer"
@@ -26,7 +26,7 @@ func Enter() -> void:
 		dodge_dir = player.cardinal_direction
 		
 	player.make_invulnerable(dodge_duration)
-	player.velocity = player.direction * dodge_speed
+	player.velocity = dodge_dir * dodge_speed
 	
 	player.is_strafing = false
 	player.animation.animation_finished.connect(_end_dodge)
@@ -38,10 +38,10 @@ func Exit() -> void:
 	if was_strafing:
 		player.cardinal_direction = prev_dir
 		player.is_strafing = true
-		player.update_animation("idle")
+		#player.update_animation("idle")
 	else:
 		player.is_strafing = false
-		player.set_direction()
+		#player.set_direction()
 		
 	player.animation.animation_finished.disconnect(_end_dodge)
 	dodging = false
@@ -57,7 +57,7 @@ func Process(_delta: float) -> State:
 	return null
 	
 func Physics( _delta: float ) -> State:
-	player.velocity = player.direction * dodge_speed
+	player.velocity = dodge_dir * dodge_speed
 	return null
 	
 func HandleInput(_event: InputEvent) -> State:

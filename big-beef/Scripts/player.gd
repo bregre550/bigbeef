@@ -56,7 +56,7 @@ var hp: int = 100
 var max_hp: int = 100
 
 var bullets_deflected: int = 0
-var deflects_needed: int = 0
+var deflects_needed: int = 3
 
 func _ready() -> void:
 	PlayerManager.player = self
@@ -65,35 +65,27 @@ func _ready() -> void:
 	SignalBus.bullet_deflected.connect(_on_bullet_deflect)
 
 func _input( event: InputEvent ):
+	if event.is_action_released("strafe") or event.is_action_released("flip strafe"):
+		if not Input.is_action_pressed("strafe") and not Input.is_action_pressed("flip strafe"):
+			is_strafing = false
+			
 	if animation.current_animation.contains("attack") or animation.current_animation.contains("dodge"):
-		if event.is_action("flip strafe") or event.is_action("strafe"):
-			if event.is_released():
-				is_strafing = false
-			return
+		return
 		
-	if event.is_action("strafe"):
-		if event.is_pressed():
-			is_strafing = true
-		elif event.is_released() and not Input.is_action_pressed("flip strafe"):
-			is_strafing = false
+	if event.is_action_pressed("strafe"):
+		is_strafing = true
 	
-	if event.is_action("flip strafe"):
-		if event.is_pressed():
-			if direction == Vector2.ZERO:
-				direction = OPP_DIR[animation.assigned_animation]
-				if set_direction():
-					update_animation("idle")
-			else:
-				direction *= -1
-				if set_direction():
-					if animation.current_animation.contains("stun"): 
-						#update_animation("stun")
-						pass
-					else:
-						update_animation("walk")
-			is_strafing = true
-		elif event.is_released() and not Input.is_action_pressed("strafe"):
-			is_strafing = false
+	if event.is_action_pressed("flip strafe"):
+		if direction == Vector2.ZERO:
+			direction = OPP_DIR[animation.assigned_animation]
+			if set_direction():
+				update_animation("idle")
+		else:
+			direction *= -1
+			if set_direction():
+				if not animation.current_animation.contains("stun"): 
+					update_animation("walk")
+		is_strafing = true
 			
 func _process(_delta: float) -> void:
 	direction = Vector2(
