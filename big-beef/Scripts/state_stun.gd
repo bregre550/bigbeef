@@ -46,6 +46,7 @@ func HandleInput(_event: InputEvent) -> State:
 	
 func _player_damaged(_hurt_box: HurtBox) -> void:
 	hurt_box = _hurt_box
+	player.hit_stop(.08)
 	state_machine.call_deferred("ChangeState", self)
 	
 func _animation_finished(_a: String) -> void:

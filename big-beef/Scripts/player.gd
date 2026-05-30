@@ -169,3 +169,8 @@ func update_sword_layer() -> void:
 		move_child(attack_sprite, 0)
 	else:
 		move_child(attack_sprite, 1)
+
+func hit_stop(duration: float = 0.1):
+	Engine.time_scale = 0.0
+	await get_tree().create_timer(duration, true, false, true).timeout
+	Engine.time_scale = 1.0
