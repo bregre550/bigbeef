@@ -70,3 +70,8 @@ func make_invulnerable(_duration: float = 1.0) -> void:
 	await get_tree().create_timer(_duration).timeout
 	
 	invulnerable = false
+	
+func hit_stop(duration: float = 0.1):
+	Engine.time_scale = 0.0
+	await get_tree().create_timer(duration, true, false, true).timeout
+	Engine.time_scale = 1.0

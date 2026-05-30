@@ -20,9 +20,10 @@ func Enter() -> void:
 		attack.animation.stop()
 	player.animation.animation_finished.connect(_animation_finished)
 	player.make_invulnerable(invulnerable_duration)
+	
 	direction = player.global_position.direction_to(hurt_box.global_position)
 	player.velocity = direction * -knockback_speed
-	player.set_direction()
+
 	player.update_animation("stun")
 	
 	player.effect_animation_player.play("damaged")
@@ -45,6 +46,7 @@ func HandleInput(_event: InputEvent) -> State:
 	
 func _player_damaged(_hurt_box: HurtBox) -> void:
 	hurt_box = _hurt_box
+	player.hit_stop(.08)
 	state_machine.call_deferred("ChangeState", self)
 	
 func _animation_finished(_a: String) -> void:

@@ -4,6 +4,8 @@ var dodging: bool = false
 
 @export var dodge_speed: float = 110.0
 @export var dodge_duration: float = 0.3
+@export var dodge_decay: float = 5.0
+@export var dodge_burst_coef: float = 2.0
 
 @onready var animation: AnimationPlayer = $"../../AttackSprite/AttackAnimationPlayer"
 
@@ -23,10 +25,10 @@ func Enter() -> void:
 		player.is_strafing = false
 		player.set_direction()
 	else:
-		dodge_dir = player.cardinal_direction
+		dodge_dir = player.cardinal_direction.normalized()
 		
 	player.make_invulnerable(dodge_duration)
-	player.velocity = dodge_dir * dodge_speed
+	player.velocity = dodge_dir * (dodge_speed * dodge_burst_coef)
 	
 	player.is_strafing = false
 	player.animation.animation_finished.connect(_end_dodge)
@@ -57,7 +59,8 @@ func Process(_delta: float) -> State:
 	return null
 	
 func Physics( _delta: float ) -> State:
-	player.velocity = dodge_dir * dodge_speed
+	if player.velocity.length() > dodge_speed:
+		player.velocity = player.velocity.move_toward(dodge_dir * dodge_speed, dodge_speed * dodge_decay * _delta )
 	return null
 	
 func HandleInput(_event: InputEvent) -> State:

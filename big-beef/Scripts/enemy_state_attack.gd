@@ -6,6 +6,7 @@ var attacking: bool = false
 @export_range(1, 20, 0.5) var decelerate_speed: float = 5.0
 @export var slime_ball: PackedScene
 @export var aim_spread: float = 5.0
+@export var y_axis_offet: float = 3.5
 
 @onready var animation: AnimationPlayer = $"../../AnimationPlayer"
 @onready var chase: EnemyStateChase = $"../Chase"
@@ -18,7 +19,10 @@ func init() -> void:
 func enter() -> void:
 	var b = slime_ball.instantiate()
 	get_tree().root.add_child(b)
+		
 	b.global_position = enemy.global_position
+	if enemy.cardinal_direction == Vector2.RIGHT or enemy.cardinal_direction == Vector2.LEFT:
+		b.global_position.y -= y_axis_offet
 	var spread: float = deg_to_rad(randf_range(-aim_spread, aim_spread))
 	var bullet_direction: Vector2 = enemy.direction.rotated(spread)
 	b.shoot(bullet_direction)
