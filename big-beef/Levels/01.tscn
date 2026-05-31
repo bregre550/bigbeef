@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://clbye4eh0fckw"]
+
+[ext_resource type="PackedScene" uid="uid://d0apvy5upeylu" path="res://Levels/level_tile_map.tscn" id="1_shx3v"]
+[ext_resource type="PackedScene" uid="uid://cru4ituq2w2ab" path="res://Levels/player_spawn.tscn" id="2_psq72"]
+
+[node name="01" type="Node2D"]
+
+[node name="LevelTileMap" parent="." instance=ExtResource("1_shx3v")]
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("2_psq72")]

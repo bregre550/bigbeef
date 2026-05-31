@@ -69,7 +69,7 @@ func _input( event: InputEvent ):
 		if not Input.is_action_pressed("strafe") and not Input.is_action_pressed("flip strafe"):
 			is_strafing = false
 			
-	if animation.current_animation.contains("attack") or animation.current_animation.contains("dodge"):
+	if animation.current_animation.contains("attack") or animation.current_animation.contains("dodge") or animation.current_animation.contains("stun"):
 		return
 		
 	if event.is_action_pressed("strafe"):

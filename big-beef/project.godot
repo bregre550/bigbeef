@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BigBeef"
-run/main_scene="uid://2rku280p86gm"
+run/main_scene="uid://clbye4eh0fckw"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
