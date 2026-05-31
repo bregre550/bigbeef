@@ -1,4 +1,4 @@
-class_name LevelTileMap extends TileMap
+class_name LevelTileMap extends TileMapLayer
 
 func _ready() -> void:
 	LevelManager.change_tile_map_bounds(get_tile_map_bounds())
